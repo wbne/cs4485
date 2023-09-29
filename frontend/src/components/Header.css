@@ -1,0 +1,35 @@
+.Header {
+	min-height: 75px;
+	min-width: 100vw;
+	background: #D9F4EF;
+	display: flex;
+}
+
+img {
+	font-size: 20px;
+	line-height: 45px;
+	padding: 10px;
+}
+
+img:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.Options {
+	display: flex;
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+.Options > a {
+	padding: 10px;
+	min-width: 100px;
+	min-height: 55px;
+	line-height: 55px;
+}
+
+.Options > a:hover {
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
