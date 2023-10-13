@@ -8,6 +8,7 @@ import {
 import Home from './pages/Home'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
+import Profile from './pages/profilePage'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
   },
   {
     path: "profile",
-    element: <Login/>,
+    element: <Profile/>,
   },
 ]);
 
