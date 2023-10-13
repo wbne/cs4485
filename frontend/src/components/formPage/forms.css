@@ -1,0 +1,39 @@
+.title {
+	font-size: 70px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.forgot {
+}
+
+.forgot:hover {
+	cursor: pointer;
+	color: grey;
+}
+
+fieldset {
+	border: none !important;
+}
+
+.form {
+	max-width: 45vw;
+	margin: auto;
+	padding: 10px;
+}
+
+.form > div {
+	margin-top: 10px;
+	margin-bottom: 40px;
+	background-color: #F1F1F1;
+	border-radius: 0.1px;
+}
+
+.form > a[type="submit"] {
+	height: 55px;
+	background-color: #7E729F;
+}
+
+.form > button:hover {
+	background-color: #5E526F;
+}
