@@ -29,8 +29,8 @@ function RegistrationForm() {
   };
 
   // Handle subject selection
-  const handleSelectChange = (event: ChangeEvent<{ value: unknown }>) => {
-    const value = event.target.value as string;
+  const handleSelectChange = (event: ChangeEvent<string>) => {
+    const value = event.target as string;
     setFormData({ ...formData, subject: value });
   };
 
@@ -90,7 +90,6 @@ function RegistrationForm() {
             id="subject"
             name="subject"
             value={formData.subject}
-            onChange={handleSelectChange}
             label="Select a Subject"
           >
             <MenuItem value="math">Math</MenuItem>

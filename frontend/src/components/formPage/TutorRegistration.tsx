@@ -89,7 +89,6 @@ function TutorRegistration() {
             name="subjects"
             multiple
             value={formData.subjects}
-            onChange={handleSelectChange}
             label="Select Subjects"
             renderValue={(selected) => (selected as string[]).join(', ')}
           >
