@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import './forms.css';
 
 function LoginForm() {
   // Define state variables to store form data
@@ -24,7 +25,9 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <h1 className="title"> Login </h1>
+    <form className="form" onSubmit={handleSubmit}>
       <div>
         <TextField
           required
@@ -56,10 +59,14 @@ function LoginForm() {
         variant="contained"
         color="primary"
         fullWidth
+	href="/home"
       >
         Log In
       </Button>
+      <a className="forgot">Forgot Password?</a>
     </form>
+
+    </>
   );
 }
 

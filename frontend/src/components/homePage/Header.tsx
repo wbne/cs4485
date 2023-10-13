@@ -17,7 +17,7 @@ export default function ResponsiveAppBar() {
 					variant="h6"
 					noWrap
 					component="a"
-					href="#app-bar-with-responsive-menu"
+					href="/home"
 					sx={{
 					ml: 5,
 					display: { xs: 'none', md: 'flex' }
@@ -30,7 +30,7 @@ export default function ResponsiveAppBar() {
 			</Box>
 			<Box>
             {['Find Tutor', 'Favorites', 'Appointments', 'Profile'].map(text => (
-              <Button key={text} sx={{ textTransform: 'none', marginRight: 5 }}>
+              <Button key={text} href="/profile" sx={{ textTransform: 'none', marginRight: 5 }}>
                 <Typography color='black' fontFamily='Inter'>{text}</Typography>
               </Button>
             ))}

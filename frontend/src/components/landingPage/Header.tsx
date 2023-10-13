@@ -17,7 +17,7 @@ export default function ResponsiveAppBar() {
 					variant="h6"
 					noWrap
 					component="a"
-					href="#app-bar-with-responsive-menu"
+					href="/"
 					sx={{
 					ml: 5,
 					display: { xs: 'none', md: 'flex' }
@@ -29,10 +29,10 @@ export default function ResponsiveAppBar() {
 				</Typography>
 			</Box>
           <Box>
-			<Button variant="outlined" sx={{color: 'black', border: '1.5px solid #7E729F', marginRight: 2}}>
+			<Button variant="outlined" href="/login" sx={{color: 'black', border: '1.5px solid #7E729F', marginRight: 2}}>
 				<Typography fontFamily='Inter' textTransform='none'>Login as Student</Typography>
 			</Button>
-			<Button variant="outlined" sx={{color: 'black', border: '1.5px solid #7E729F', marginRight: 5}}>
+			<Button variant="outlined" href="/login" sx={{color: 'black', border: '1.5px solid #7E729F', marginRight: 5}}>
 				<Typography fontFamily='Inter' textTransform='none'>Login as Tutor</Typography>
 			</Button>
           </Box>
