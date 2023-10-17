@@ -8,7 +8,8 @@ import {
 import Home from './pages/Home'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
-import Profile from './pages/profilePage'
+import Profile from './pages/ProfilePage'
+import FindTutor from "./pages/FindTutor";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
     path: "profile",
     element: <Profile/>,
   },
+  {
+    path: "findtutor",
+    element: <FindTutor/>
+  }
 ]);
 
 root.render(
