@@ -25,10 +25,11 @@ export default function ProfilePage() {
                     <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Student Account</Typography>
                 </Box>
             </div>
-            <div className='flex flex-row justify-center' style={{height: '80%', width: '70%', paddingTop: '6rem'}}>
+            <div className='flex justify-center' style={{height: '80%', width: '70%', paddingTop: '6rem'}}>
                 <div className='flex flex-col justify-around w-7/12'>
                     <TextField
                     required
+                    variant='filled'
                     id="firstName"
                     label="First Name"
                     sx={{width: '100%'}}
@@ -36,6 +37,7 @@ export default function ProfilePage() {
                     <TextField
                     required
                     id="lastName"
+                    variant='filled'
                     label="Last Name"
                     sx={{width: '100%'}}
                     />
@@ -46,6 +48,7 @@ export default function ProfilePage() {
                         onChange={(newValue) => setValue(newValue)}
                         slotProps={{
                             textField: {
+                                variant: "filled",
                                 required: true,
                             },
                         }}
@@ -53,6 +56,7 @@ export default function ProfilePage() {
                         />
                     </LocalizationProvider>
                     <TextField
+                    variant='filled'
                     required
                     id="user"
                     label="Username"
@@ -61,6 +65,7 @@ export default function ProfilePage() {
                     <TextField
                     required
                     id="pwd"
+                    variant='filled'
                     label="Password"
                     sx={{width: '100%'}}
                     />
