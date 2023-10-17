@@ -24,8 +24,8 @@ export default function LandingPageBody() {
 				height="30vh" 
 				alignItems="center"
 			>
-   				<Typography fontFamily='Playfair Display' fontSize={80} fontWeight='medium'>Welcome, Username!</Typography>
-    			<Typography fontFamily='Inter' fontSize={30} fontWeight='normal'>Continue your learning through tutoring</Typography>
+   				<Typography fontFamily='Playfair Display' sx={{fontSize:{xs:60, md:80}}} fontWeight='medium'>Welcome, Username!</Typography>
+    			<Typography fontFamily='Inter' sx={{fontSize:{xs:20, md:30}}} fontWeight='normal'>Continue your learning through tutoring</Typography>
 			</Box>
 			
 			
@@ -58,8 +58,8 @@ export default function LandingPageBody() {
 							gap: '1rem'
 						}}
 					>
-						<Typography fontFamily='Inter' fontSize={130} fontWeight='medium' color='#7D729E'>{box.number}</Typography>
-						<Typography fontFamily='Inter' fontSize={30} fontWeight='light'align='center'>{box.text}</Typography>
+						<Typography fontFamily='Inter' sx={{fontSize:{xs:90, md:130}}} fontWeight='medium' color='#7D729E'>{box.number}</Typography>
+						<Typography fontFamily='Inter' sx={{fontSize:{xs:20, md:30}}} fontWeight='light'align='center'>{box.text}</Typography>
 					</Grid>
 				))}	
 				
