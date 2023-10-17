@@ -8,7 +8,7 @@ import {
 import Home from './pages/Home'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
-import Profile from './pages/ProfilePage'
+import Profile from './pages/Profile'
 import FindTutor from "./pages/FindTutor";
 
 const root = ReactDOM.createRoot(
