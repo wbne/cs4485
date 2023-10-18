@@ -19,8 +19,8 @@ export default function ResponsiveAppBar() {
 					component="a"
 					href="/home"
 					sx={{
-					ml: 5,
-					display: { xs: 'none', md: 'flex' }
+						ml: 5,
+						display: { xs: 'none', md: 'flex' }
 					}}
 				>
 					<Typography variant='h4' color='inherit' fontFamily='Playfair Display' fontWeight={600}>

@@ -1,84 +1,134 @@
-import { Box, Typography, Button, Grid, TextField } from '@mui/material';
+import { Box, Typography, Button, TextField, Autocomplete, Avatar, styled, alpha, TextFieldProps, OutlinedInputProps, OutlinedInput } from '@mui/material';
 
 import "@fontsource/playfair-display";
 import "@fontsource/inter";
 import '@fontsource/inter';
 import '@fontsource/inter/300.css';
+import pfp from '../../assets/pfp_temp.jpg';
 import { useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { DatePicker } from '@mui/x-date-pickers';
+
+interface Tutors {
+    name: string;
+    topic: string
+}
 
 export default function FindTutorPage() {
-    const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()));
-    const MAX_AGE = 100;
-    const MIN_AGE = 18;
+    const [tutorName, setTutorName] = useState<string>('');
+    const [area, setArea] = useState<string>('');
 
+    const tutors: readonly Tutors[] = [
+        {name: 'Lokesh', topic: 'CS'},
+        {name: 'Ben', topic: 'Math'},
+        {name: 'Preesha', topic: 'English'}
+    ];
+
+    const handleTutorChange = (event: React.ChangeEvent<{}>, newTutor: string) => {
+        setTutorName(newTutor);
+    };
+
+    const filterTutor = (options: Tutors[], state: { inputValue: string }) => {
+        return options
+            .filter(option => option.name.toLowerCase().includes(state.inputValue.toLowerCase()))
+            .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
+    };
+    
+    const handleAreaChange = (event: React.ChangeEvent<{}>, newSubject: string) => {
+        setArea(newSubject);
+    };
+
+    const filterSubject = (options: Tutors[], state: { inputValue: string }) => {
+        return options
+            .filter(option => option.name.toLowerCase().includes(state.inputValue.toLowerCase()))
+            .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
+    };
+    
     return (
         <div className='flex flex-row' style={{height: '90vh', width: '100vw',}}>
-            <div style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', width:'40%', paddingLeft: '4rem', paddingTop: '6rem', height: '100%'}}>
+            <div style={{paddingLeft: '4rem', paddingTop: '2rem'}}>
                 <Box>
-                    <Typography fontFamily='playfair-display' fontSize={55} >Profile</Typography>
-                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Student Account</Typography>
+                    <Typography  fontFamily='playfair-display' fontWeight={'medium'} fontSize={40}>Find your Tutor...</Typography>
                 </Box>
-            </div>
-            <div className='flex flex-row justify-center' style={{height: '80%', width: '70%', paddingTop: '6rem'}}>
-                <div className='flex flex-col justify-around w-7/12'>
-                    <TextField
-                    required
-                    id="firstName"
-                    label="First Name"
-                    sx={{width: '100%'}}
-                    />
-                    <TextField
-                    required
-                    id="lastName"
-                    label="Last Name"
-                    sx={{width: '100%'}}
-                    />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                        label="Date of birth"
-                        value={value}
-                        onChange={(newValue) => setValue(newValue)}
-                        slotProps={{
-                            textField: {
-                                required: true,
-                            },
+                <div className='flex flex-row' style={{marginTop:10}}>
+                    <Typography sx={{mt: 2}} fontFamily='Inter' fontWeight={'medium'} fontSize={20}>Search by: </Typography>
+                    <Autocomplete
+                        id="findTutor"
+                        ListboxProps={{
+                            style:{
+                                maxHeight: '30vh',
+                            }
                         }}
-                        disableFuture
-                        />
-                    </LocalizationProvider>
-                    <TextField
-                    required
-                    id="user"
-                    label="Username"
-                    sx={{width: '100%'}}
+                        inputValue={tutorName}
+                        onInputChange={handleTutorChange}
+                        filterOptions={filterTutor}
+                        options={tutors}
+                        getOptionLabel={(option: Tutors) => option.name}
+                        sx={{ width: 200, ml: 2 }}
+                        renderInput={(params) =>
+                            <TextField 
+                                {...params}
+                                variant='filled'
+                                size='small'
+                                label="Tutor name" />
+                        }
                     />
-                    <TextField
-                    required
-                    id="pwd"
-                    label="Password"
-                    sx={{width: '100%'}}
+                    <Autocomplete
+                        id="major"
+                        ListboxProps={
+                            {
+                              style:{
+                                  maxHeight: '30vh',
+                              }
+                            }
+                        }
+                        inputValue={area}
+                        onInputChange={handleAreaChange}
+                        filterOptions={filterSubject}
+                        options={tutors}
+                        getOptionLabel={(option) => option.topic}
+                        sx={{ width: 200, ml: 2 }}
+                        renderInput={(params) =>
+                            <TextField 
+                                {...params}
+                                variant='filled'
+                                size='small'
+                                label="Area" />
+                        }
                     />
-                    <div className='flex flex-row w-full'>
-                        <Button sx={{color: 'black', borderColor: '#7E729F', '&:hover': {
-                                color: '#fff',
-                                backgroundColor: '#7E729F',
-                                border: 'none'
-                        }}} variant="outlined">
-                            <Typography fontFamily='Inter' textTransform='none'>Cancel</Typography>
-                        </Button>
-                        <Button sx={{backgroundColor: '#7E729F', ml: 2, '&:hover': {
-                                backgroundColor: '#fff',
-                                color: '#7E729F',
-                        }}} variant="contained">
-                            <Typography fontFamily='Inter' textTransform='none'>Save Changes</Typography>
-                        </Button>
-                    </div>
+                </div>
+                <div className='flex flex-col justify-center'>
+                    {tutors.map((tutor: Tutors, index: number) => {
+                        if ((tutorName === '' && area === '')
+                         || (tutorName !== '' && area === '' && tutor.name.includes(tutorName))
+                         || (area !== '' && tutorName === '' && tutor.topic.includes(area))
+                         || (tutorName !== '' && tutor.name.includes(tutorName) && area !== '' && tutor.topic.includes(area))) {
+                            return (
+                                <Box key={index} sx={{width: '80vw', mt: 5, background: 'rgba(217, 217, 217, 0.37)'}}>
+                                    <div className='flex flex-row justify-between mt-3 mb-3'>
+                                        <div className='flex flex-row pl-2'>
+                                            <Avatar sx={{width: 56, height: 56, mt: 1}} alt={tutorName} src={pfp} />
+                                            <div className='pl-3 flex flex-col'>
+                                                <Typography fontSize={20} fontWeight='bold' fontFamily={'Inter'}>{tutor.name}</Typography>
+                                                <Typography fontSize={15} fontFamily={'Inter'}>{tutor.topic}</Typography>
+                                                <Typography fontSize={15} fontFamily={'Inter'}>More Information</Typography>
+                                            </div>
+                                        </div>
+                                        <div className='pr-5'>
+                                            <Button sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
+                                                <Typography textTransform='none'>Book</Typography>
+                                            </Button>
+                                            <Button sx={{backgroundColor: '#7E729F', color: 'white', height: '30px', '&:hover': {
+                                                backgroundColor: '#fff',
+                                                color: '#7E729F'
+                                            }}}>
+                                                <Typography textTransform='none'>Like</Typography>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </Box>
+                            );
+                        }
+                        })
+                    }
                 </div>
             </div>
         </div>
