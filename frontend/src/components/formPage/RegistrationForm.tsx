@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
+import './forms.css';
 
 interface FormData {
   name: string;
@@ -43,7 +44,8 @@ function RegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
+      <h1 className="title">Let's get Onboarded!</h1>
       <div>
         <TextField
           required

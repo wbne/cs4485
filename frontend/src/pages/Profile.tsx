@@ -1,5 +1,5 @@
 import Header from '../components/profilePage/Header';
-import ProfilePage from '../components/profilePage/ProfilePage';
+import ProfilePage from '../components/profilePage/profilePage';
 
 function Profile() {
   return (

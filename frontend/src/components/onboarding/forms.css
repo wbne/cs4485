@@ -34,11 +34,6 @@ fieldset {
 	background-color: #7E729F;
 }
 
-.form > button[type="submit"] {
-	height: 55px;
-	background-color: #7E729F;
-}
-
 .form > button:hover {
 	background-color: #5E526F;
 }

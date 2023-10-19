@@ -10,6 +10,8 @@ import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import FindTutor from "./pages/FindTutor";
+import TutorOnboarding from "./pages/Onboarding";
+import StudentOnboarding from "./pages/StudentOnboarding";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
   {
     path: "findtutor",
     element: <FindTutor/>
+  },
+  {
+    path: "newstudent",
+    element: <StudentOnboarding/>
+  },
+  {
+    path: "newtutor",
+    element: <TutorOnboarding/>
   }
 ]);
 

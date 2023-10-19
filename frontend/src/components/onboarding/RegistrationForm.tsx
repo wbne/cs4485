@@ -5,45 +5,45 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
-import './forms.css';
 
-interface TutorFormData {
+interface FormData {
   name: string;
   email: string;
   password: string;
-  subjects: string[];
-  experience: string;
+  subject: string;
 }
 
-function TutorRegistration() {
-  const [formData, setFormData] = useState<TutorFormData>({
+function RegistrationForm() {
+  // Define state variables to store form data
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     password: '',
-    subjects: [],
-    experience: '',
+    subject: '',
   });
 
+  // Handle form field changes
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSelectChange = (event: ChangeEvent<{ value: unknown }>) => {
-    const selectedSubjects = event.target.value as string[];
-    setFormData({ ...formData, subjects: selectedSubjects });
+  // Handle subject selection
+  const handleSelectChange = (event: ChangeEvent<string>) => {
+    const value = event.target as string;
+    setFormData({ ...formData, subject: value });
   };
 
+  // Handle form submission
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // You can access form data in the `formData` object here and perform registration logic.
-    console.log('Tutor Registration Data:', formData);
-    // You can also make an API request to store tutor registration data.
+    console.log('Form Data:', formData);
+    // You can also make an API request to store user data.
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <h1 className="title">Let's get Onboarded!</h1>
+    <form onSubmit={handleSubmit}>
       <div>
         <TextField
           required
@@ -84,15 +84,13 @@ function TutorRegistration() {
       </div>
       <div>
         <FormControl fullWidth variant="outlined">
-          <InputLabel id="subjects-label">Select Subjects</InputLabel>
+          <InputLabel id="subject-label">Select a Subject</InputLabel>
           <Select
-            labelId="subjects-label"
-            id="subjects"
-            name="subjects"
-            multiple
-            value={formData.subjects}
-            label="Select Subjects"
-            renderValue={(selected) => (selected as string[]).join(', ')}
+            labelId="subject-label"
+            id="subject"
+            name="subject"
+            value={formData.subject}
+            label="Select a Subject"
           >
             <MenuItem value="math">Math</MenuItem>
             <MenuItem value="science">Science</MenuItem>
@@ -101,31 +99,17 @@ function TutorRegistration() {
           </Select>
         </FormControl>
       </div>
-      <div>
-        <TextField
-          required
-          id="experience"
-          name="experience"
-          label="Tutoring Experience"
-          multiline
-          rows={4}
-          value={formData.experience}
-          onChange={handleInputChange}
-          variant="outlined"
-          fullWidth
-        />
-      </div>
       <Button
         type="submit"
         variant="contained"
         color="primary"
         fullWidth
       >
-        Register as a Tutor
+        Register
       </Button>
     </form>
   );
 }
 
-export default TutorRegistration;
+export default RegistrationForm;
 

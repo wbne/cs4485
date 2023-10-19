@@ -24,11 +24,11 @@ export default function LandingPageBody() {
 							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}> Create an account and connect with</Typography>
 							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}> a tutor today.</Typography>
 							<Box mt='50px'/>
-							<Button variant='contained' sx={{backgroundColor: '#7E729F'}}>
+							<Button variant='contained' href="/newstudent" sx={{backgroundColor: '#7E729F'}}>
 								<Typography width='200px' fontFamily='Inter' fontSize='20px' textTransform='none'>Join as Student</Typography>
 							</Button>
 							<Box mt='10px'/>
-							<Button variant='contained' sx={{backgroundColor: '#7E729F'}}>
+							<Button variant='contained' href="/newtutor" sx={{backgroundColor: '#7E729F'}}>
 								<Typography width='200px' fontFamily='Inter' fontSize='20px' textTransform='none'>Join as Tutor</Typography>
 							</Button>
 					</Box>
