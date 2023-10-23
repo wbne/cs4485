@@ -12,7 +12,8 @@ import Profile from './pages/Profile'
 import FindTutor from "./pages/FindTutor";
 import TutorOnboarding from "./pages/Onboarding";
 import StudentOnboarding from "./pages/StudentOnboarding";
-import TutorProfilePage from "./pages/tutorProfilePage"
+import TutorProfilePage from "./pages/tutorProfilePage";
+import Favorites from "./pages/Favorites";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "tutorprofile",
     element: <TutorProfilePage/>
+  },
+  {
+    path: "favorites",
+    element: <Favorites/>
   }
 ]);
 
