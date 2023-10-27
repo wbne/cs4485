@@ -11,7 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { DatePicker } from '@mui/x-date-pickers';
 
-export default function tutorProfilePage() {
+export default function TutorProfilePage() {
     const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()));
     const MAX_AGE = 100;
     const MIN_AGE = 18;
