@@ -35,10 +35,11 @@ function TutorRegistration() {
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // You can access form data in the `formData` object here and perform registration logic.
+    //TODO: Add logic to see if user is validated.
+    // 		If they are then redirect
+    // 		Else return the error
+    //event.preventDefault();
     console.log('Tutor Registration Data:', formData);
-    // You can also make an API request to store tutor registration data.
   };
 
   return (

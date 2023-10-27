@@ -17,11 +17,13 @@ function LoginForm() {
   };
 
   // Handle form submission
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // You can access form data in the `formData` object here and perform login logic.
+  const handleSubmit = (event: any) => {
+    //TODO: Add logic to see if user is validated.
+    // 		If they are then redirect
+    // 		Else return the error
+    //event.preventDefault();
     console.log('Form Data:', formData);
-    // You can also make an API request to validate the login credentials.
+    
   };
 
   return (
@@ -59,7 +61,8 @@ function LoginForm() {
         variant="contained"
         color="primary"
         fullWidth
-	href="/home"
+	href="./home"
+	onClick={handleSubmit}
       >
         Log In
       </Button>

@@ -8,12 +8,14 @@ import {
 import Home from './pages/Home'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
+import TutorLogin from './pages/TutorLogin'
 import Profile from './pages/Profile'
 import FindTutor from "./pages/FindTutor";
 import TutorOnboarding from "./pages/Onboarding";
 import StudentOnboarding from "./pages/StudentOnboarding";
-import TutorProfilePage from "./pages/tutorProfilePage";
+import TutorProfilePage from "./pages/TutorProfilePage";
 import Favorites from "./pages/Favorites";
+import TutorHomePage from "./pages/TutorHomePage";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -29,8 +31,16 @@ const router = createBrowserRouter([
     element: <Login/>,
   },
   {
+    path: "tutor/login",
+    element: <TutorLogin/>,
+  },
+  {
     path: "home",
     element: <Home/>,
+  },
+  {
+    path: "tutor/home",
+    element: <TutorHomePage/>,
   },
   {
     path: "profile",
@@ -50,7 +60,7 @@ const router = createBrowserRouter([
   }
   ,
   {
-    path: "tutorprofile",
+    path: "tutor/profile",
     element: <TutorProfilePage/>
   },
   {

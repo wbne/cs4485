@@ -1,4 +1,4 @@
-import Header from '../components/tutorProfilePage/Header';
+import Header from '../components/homePage/TutorHeader';
 import TutorProfilePage from '../components/tutorProfilePage/tutorProfilePage';
 
 function TutorProfile() {
