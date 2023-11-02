@@ -1,5 +1,5 @@
 import Header from '../components/homePage/TutorHeader';
-import TutorProfilePage from '../components/tutorProfilePage/TutorProfilePage';
+import TutorProfilePage from '../components/tutorProfilePage/tutorProfilePage';
 
 function TutorProfile() {
   return (
