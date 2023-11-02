@@ -19,13 +19,12 @@ const AppointmentsBox = styled(Box)(({ theme }) => ({
 }));
 
 const AppointmentsPage = () => {
-
     return (
         <div className='flex' style={{height: '90vh', width: '100vw',}}>
             <Box padding={4}>   
                 <Box padding={2}>
                     <Typography fontFamily='Playfair Display' sx={{fontSize:{xs:40, md:60}, mb: 2}} fontWeight='medium'>Appointments</Typography>
-                    <Button sx={{backgroundColor: '#7D729E', color: 'white', mr:4, height: '40px', textTransform: 'none'}}>
+                    <Button href={'/appointments/book'}sx={{backgroundColor: '#7D729E', color: 'white', mr:4, height: '40px', textTransform: 'none'}}>
                         <Typography fontFamily='Inter' fontWeight='light'>Book New Appointment</Typography>
                     </Button>
                 </Box>

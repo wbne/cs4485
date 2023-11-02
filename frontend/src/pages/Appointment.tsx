@@ -1,7 +1,7 @@
 import AppointmentsPage from '../components/appointmentPage/AppointmentPage'; 
 import Header from '../components/profilePage/Header';
 
-function Profile() {
+function Appointment() {
   return (
     <div style={{height: '100vh'}}>
       <Header/>
@@ -10,4 +10,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Appointment;

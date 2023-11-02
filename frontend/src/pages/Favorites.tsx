@@ -1,7 +1,7 @@
 import FavoriteTutorPage from '../components/favoriteTutorPage/FavoriteTutor';
 import Header from '../components/profilePage/Header';
 
-function Profile() {
+function Favorites() {
   return (
     <div style={{height: '100vh'}}>
       <Header/>
@@ -10,4 +10,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Favorites;

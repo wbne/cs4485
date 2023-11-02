@@ -5,7 +5,6 @@ import "@fontsource/inter";
 import '@fontsource/inter';
 import '@fontsource/inter/300.css';
 import pfp from '../../assets/pfp_temp.jpg';
-import { useState } from 'react';
 
 interface Tutors {
     name: string;
@@ -18,18 +17,6 @@ export default function FavoriteTutorPage() {
         {name: 'Ben', topic: 'Math'},
         {name: 'Preesha', topic: 'English'}
     ];
-
-    const filterTutor = (options: Tutors[], state: { inputValue: string }) => {
-        return options
-            .filter(option => option.name.toLowerCase().includes(state.inputValue.toLowerCase()))
-            .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
-    };
-
-    const filterSubject = (options: Tutors[], state: { inputValue: string }) => {
-        return options
-            .filter(option => option.name.toLowerCase().includes(state.inputValue.toLowerCase()))
-            .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
-    };
     
     return (
         <div className='flex flex-row' style={{height: '90vh', width: '100vw',}}>
