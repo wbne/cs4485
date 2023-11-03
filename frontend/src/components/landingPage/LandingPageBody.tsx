@@ -18,22 +18,21 @@ export default function LandingPageBody() {
 				sx={{height: '90vh'}}
 			>
 				<Grid item xs={3}>
-					<Box width='400px'>
-							<Typography fontFamily='Inter' fontSize={55} fontWeight='bold'>Start Learning More.</Typography>
-							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}>Find a tutor that best fits your needs.</Typography>
-							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}> Create an account and connect with</Typography>
-							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}> a tutor today.</Typography>
-							<Box mt='50px'/>
+					<Box width='500px' >
+							<Typography fontFamily='Inter' fontSize={62} fontWeight='bold' sx={{lineHeight: 1.25, mb: 3}}>Start Learning More.</Typography>
+							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}>Find a tutor that best fits your needs at your time.</Typography>
+							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}> Create an account and connect with our top tutors today!</Typography>
+							<Box mt='40px'/>
 							<Button variant='contained' href="/newstudent" sx={{backgroundColor: '#7E729F', textAlign: 'center'}}>
 								<Typography width='200px' fontFamily='Inter' fontSize='20px' textTransform='none'>Join as Student</Typography>
 							</Button>
-							<Box mt='10px'/>
+							<Box mt='25px'/>
 							<Button variant='contained' href="/newtutor" sx={{backgroundColor: '#7E729F', textAlign: 'center'}}>
 								<Typography width='200px' fontFamily='Inter' fontSize='20px' textTransform='none'>Join as Tutor</Typography>
 							</Button>
 					</Box>
 				</Grid>
-				<img src={boy} width='500px' height='500px' alt="dude looking through monitor"/>
+				<img src={boy} width='550px' height='550px' alt="dude looking through monitor" style={{ marginLeft: '-100px' }} />
 			</Grid>
 		</div>
   );
