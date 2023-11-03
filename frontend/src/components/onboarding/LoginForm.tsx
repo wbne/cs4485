@@ -26,7 +26,7 @@ function LoginForm() {
 
   return (
     <>
-    <h1 className="title"> Login </h1>
+    <h1 className="title"  style={{ marginTop: '20px', fontFamily: 'Playfair Display' }}> Login </h1>
     <form className="form" onSubmit={handleSubmit}>
       <div>
         <TextField
@@ -63,7 +63,7 @@ function LoginForm() {
       >
         Log In
       </Button>
-      <a className="forgot">Forgot Password?</a>
+      <a className="forgot" style={{marginTop: '10px'}}>Forgot Password?</a>
     </form>
 
     </>

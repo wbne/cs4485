@@ -4,7 +4,7 @@ import "@fontsource/playfair-display";
 import "@fontsource/inter";
 import '@fontsource/inter';
 import '@fontsource/inter/300.css';
-import '@fontsource/poppins';
+//import '@fontsource/poppins';
 import { useEffect, useState } from 'react';
 import { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
