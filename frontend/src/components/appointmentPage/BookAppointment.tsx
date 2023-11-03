@@ -49,8 +49,8 @@ export default function BookAppointment() {
         <div className='flex flex-row' style={{height: '100%', width: '100vw',}}>
             <div style={{width:'40%', paddingLeft: '4rem', paddingTop: '4rem', height: '100%'}}>
                 <Box>
-                    <Typography fontFamily='playfair-display' fontSize={55} >Book an Appointment</Typography>
-                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Some dscription about booking an appointment and some reminder and some warning</Typography>
+                    <Typography fontFamily='Playfair Display' fontSize={60} fontWeight='medium' sx={{lineHeight: 1, marginBottom: 3}}>Book an Appointment</Typography>
+                    <Typography fontFamily='Inter' width="80%" fontSize={18} fontWeight={'regular'}>Select the subject and tutor you are interested in. Then select a time the tutor is available to book an appointment</Typography>
                 </Box>
             </div>
             <div className='flex justify-center' style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', height: '100%', width: '70%', paddingTop: '4rem'}}>

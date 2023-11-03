@@ -19,7 +19,7 @@ export default function ProfilePage() {
         <div className='flex flex-row' style={{height: '90vh', width: '100vw',}}>
             <div style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', width:'40%', paddingLeft: '4rem', paddingTop: '4rem', height: '100%'}}>
                 <Box>
-                    <Typography fontFamily='playfair-display' fontSize={55} >Profile</Typography>
+                    <Typography fontFamily='Playfair Display' fontSize={60} fontWeight='medium'>Profile</Typography>
                     <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Student Account</Typography>
                 </Box>
             </div>
