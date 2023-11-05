@@ -18,6 +18,7 @@ import Favorites from "./pages/Favorites";
 import TutorHomePage from "./pages/TutorHomePage";
 import Appointments from "./pages/Appointment";
 import Book from "./pages/BookAppointment";
+import TutorAppointments from './pages/TutorAppointmentPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
   {
     path: 'appointments/book',
     element: <Book/>
+  },
+  {
+    path: 'tutor/appointments',
+    element: <TutorAppointments/>
   }
 ]);
 
