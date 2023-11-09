@@ -16,6 +16,7 @@ export default function BookAppointment() {
     const [subject, setSubject] = useState('');
     const [tutor, setTutor] = useState('');
     const [value, setValue] = useState<Dayjs | null>();
+    const [extraInfo, setExtraInfo] = useState('');
 
     const [names, setNames] = useState<string[]>([]);
     const [subjects, setSubjects] = useState<string[]>([]);
@@ -47,14 +48,14 @@ export default function BookAppointment() {
 
     return (
         <div className='flex flex-row' style={{height: '100%', width: '100vw',}}>
-            <div style={{width:'40%', paddingLeft: '4rem', paddingTop: '4rem', height: '100%'}}>
+            <div style={{width:'40%', paddingLeft: '4rem', paddingTop: '6rem', height: '100%'}}>
                 <Box>
                     <Typography fontFamily='Playfair Display' fontSize={60} fontWeight='medium' sx={{lineHeight: 1, marginBottom: 3}}>Book an Appointment</Typography>
                     <Typography fontFamily='Inter' width="80%" fontSize={18} fontWeight={'regular'}>Select the subject and tutor you are interested in. Then select a time the tutor is available to book an appointment</Typography>
                 </Box>
             </div>
-            <div className='flex justify-center' style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', height: '100%', width: '70%', paddingTop: '4rem'}}>
-                <div className='flex flex-col justify-around w-10/12'>
+            <div className='flex justify-center' style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', height: '100%', width: '70%', paddingTop: '6rem'}}>
+                <div className='flex flex-col justify-around w-8/12'>
                     <div className='flex flex-row justify-between w-7/12'>
                         <Typography fontFamily='Inter'>Tutoring Subject</Typography>
                         <Autocomplete
@@ -121,18 +122,24 @@ export default function BookAppointment() {
                         <Typography fontFamily='Inter' textTransform='none'>Write a note to your tutor about what you want to learn</Typography>
                         <TextField
                         InputProps={{style: {background: 'white'}}}
+                        value={extraInfo}
                         required
                         id="note"
                         variant='filled'
                         label=""
                         sx={{width: '100%'}}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                            setExtraInfo(event.target.value);
+                        }}
                         />
                     </div>
                     <div className='flex flex-row justify-center'>
                         <Button sx={{backgroundColor: '#A6CAA9', color: 'black', ml: 2, '&:hover': {
                                     backgroundColor: 'black',
                                     color: '#A6CAA9',
-                            }}} variant="contained">
+                        }}} disabled={subject === '' || tutor === '' || value === null || value === undefined} variant="contained" onClick={() => {
+                            alert("Subject: " + subject + "\n Tutor: " + tutor + "\n Date: " + value?.toDate())
+                        }}>
                             <Typography fontFamily='Inter' textTransform='none'>Create Appointment</Typography>
                         </Button>
                     </div>

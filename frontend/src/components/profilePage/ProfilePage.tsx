@@ -11,10 +11,12 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers';
 
 export default function ProfilePage() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()));
-    const MAX_AGE = 100;
-    const MIN_AGE = 18;
-
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    
     return (
         <div className='flex flex-row' style={{height: '100vh', width: '100vw',}}>
             <div style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', width:'40%', paddingLeft: '4rem', paddingTop: '6rem', height: '100%'}}>
@@ -30,6 +32,10 @@ export default function ProfilePage() {
                     variant='filled'
                     id="firstName"
                     label="First Name"
+                    value={firstName}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setFirstName(event.target.value);
+                    }}
                     sx={{width: '100%'}}
                     />
                     <TextField
@@ -38,6 +44,10 @@ export default function ProfilePage() {
                     variant='filled'
                     label="Last Name"
                     sx={{width: '100%'}}
+                    value={lastName}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setLastName(event.target.value);
+                    }}
                     />
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
@@ -59,13 +69,22 @@ export default function ProfilePage() {
                     id="user"
                     label="Username"
                     sx={{width: '100%'}}
+                    value={userName}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setUserName(event.target.value);
+                    }}
                     />
                     <TextField
                     required
                     id="pwd"
                     variant='filled'
                     label="Password"
+                    type='password'
                     sx={{width: '100%'}}
+                    value={password}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setPassword(event.target.value);
+                    }}
                     />
                     <div className='flex flex-row w-full'>
                         <Button sx={{color: 'black', borderColor: '#7E729F', '&:hover': {
