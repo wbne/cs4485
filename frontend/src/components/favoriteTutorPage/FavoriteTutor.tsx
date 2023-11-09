@@ -19,8 +19,8 @@ export default function FavoriteTutorPage() {
     ];
     
     return (
-        <div className='flex flex-row' style={{height: '90vh', width: '100vw',}}>
-            <div style={{paddingLeft: '4rem', paddingTop: '2rem'}}>
+        <div className='flex flex-row' style={{height: '100vh', width: '100vw',}}>
+            <div style={{paddingLeft: '4rem', paddingTop: '6rem'}}>
                 <Box>
                     <Typography fontFamily='Playfair Display' fontSize={40} fontWeight='medium'>Favorite Tutors</Typography>
                 </Box>

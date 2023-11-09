@@ -28,7 +28,7 @@ function LoginForm() {
 
   return (
     <>
-    <h1 className="title"> Login </h1>
+    <h1 style={{marginTop: 50}} className="title"> Login </h1>
     <form className="form" onSubmit={handleSubmit}>
       <div>
         <TextField

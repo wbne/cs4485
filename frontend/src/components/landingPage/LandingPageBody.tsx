@@ -15,9 +15,9 @@ export default function LandingPageBody() {
 				direction="row"
 				alignItems="center"
 				justifyContent="space-around"
-				sx={{height: '90vh'}}
+				sx={{height: '100vh'}}
 			>
-				<Grid item xs={3}>
+				<Grid item xs={2}>
 					<Box width='500px' >
 							<Typography fontFamily='Inter' fontSize={62} fontWeight='bold' sx={{lineHeight: 1.25, mb: 3}}>Start Learning More.</Typography>
 							<Typography fontFamily='Inter' fontSize={20} fontWeight={'light'}>Find a tutor that best fits your needs at your time.</Typography>
@@ -32,7 +32,7 @@ export default function LandingPageBody() {
 							</Button>
 					</Box>
 				</Grid>
-				<img src={boy} width='550px' height='550px' alt="dude looking through monitor" style={{ marginLeft: '-100px' }} />
+				<img src={boy} width='550px' height='550px' alt="dude looking through monitor" />
 			</Grid>
 		</div>
   );

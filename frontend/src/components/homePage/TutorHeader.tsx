@@ -9,7 +9,7 @@ import "@fontsource/inter";
 
 function TutorHeader() {
   return (
-    <AppBar position="static">
+    <AppBar position="absolute">
       <Container maxWidth="xl" sx={{color: 'black',backgroundColor: '#D9F4EF'}}>
         <Toolbar disableGutters>
 			<Box display='flex' flexGrow={1}>

@@ -43,7 +43,7 @@ function TutorRegistration() {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form style={{marginTop: 50}} className="form" onSubmit={handleSubmit}>
       <h1 className="title">Let's get Onboarded!</h1>
       <div>
         <TextField

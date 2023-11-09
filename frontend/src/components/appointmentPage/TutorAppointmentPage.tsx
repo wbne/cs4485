@@ -20,7 +20,7 @@ const AppointmentsBox = styled(Box)(({ theme }) => ({
 
 const AppointmentsPage = () => {
     return (
-        <div className='flex' style={{ height: '90vh', width: '100vw', }}>
+        <div className='flex' style={{ height: '100vh', width: '100vw', }}>
             <Box padding={2}>
                 <Box padding={2}>
                     <Typography fontFamily='Playfair Display' sx={{ fontSize: { xs: 40, md: 60 }, mb: 2 }} fontWeight='medium'>Appointments</Typography>

@@ -9,8 +9,8 @@ import "@fontsource/inter";
 
 export default function ResponsiveAppBar() {
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={{color: 'black',backgroundColor: '#D9F4EF'}}>
+    <AppBar position="absolute">
+      <Container maxWidth={false} sx={{color: 'black',backgroundColor: '#D9F4EF', width: '100vw'}}>
         <Toolbar disableGutters>
 			<Box display='flex' flexGrow={1}>
 				<Typography

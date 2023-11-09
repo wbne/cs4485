@@ -16,12 +16,12 @@ export default function LandingPageBody() {
 	
   return (
 	
-		<div style={{ backgroundColor: 'white'}}>
+		<div style={{ backgroundColor: 'white', height: '100vh'}}>
 			<Box 
 				display="flex" 
 				flexDirection="column" 
 				justifyContent="center"  
-				height="30vh" 
+				height="35vh" 
 				alignItems="center"
 			>
    				<Typography fontFamily='Playfair Display' sx={{fontSize:{xs:60, md:80}}} fontWeight='medium'>Welcome, Username!</Typography>

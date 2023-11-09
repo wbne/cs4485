@@ -6,11 +6,12 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import "@fontsource/playfair-display";
 import "@fontsource/inter";
+import { createFalse } from 'typescript';
 
 export default function ResponsiveAppBar() {
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl" sx={{color: 'black',backgroundColor: '#D9F4EF'}}>
+    <AppBar position="absolute">
+      <Container maxWidth={false} sx={{color: 'black',backgroundColor: '#D9F4EF', width: '100vw'}}>
         <Toolbar disableGutters>
 			<Box display='flex' flexGrow={1}>
 				<Typography
