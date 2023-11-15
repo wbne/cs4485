@@ -15,8 +15,7 @@ const boxesData = [
 export default function TutorHome() {
 	
   return (
-	
-		<div style={{ backgroundColor: 'white'}}>
+		<div style={{ backgroundColor: 'white', paddingTop: '4rem'}}>
 			<Box 
 				display="flex" 
 				flexDirection="column" 
