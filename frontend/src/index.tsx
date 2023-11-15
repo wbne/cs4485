@@ -19,6 +19,7 @@ import TutorHomePage from "./pages/TutorHomePage";
 import Appointments from "./pages/Appointment";
 import Book from "./pages/BookAppointment";
 import TutorAppointments from './pages/TutorAppointmentPage';
+import TutorAvailability from './pages/TutorAvailability';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
   {
     path: 'tutor/appointments',
     element: <TutorAppointments/>
+  },
+  {
+    path: 'tutor/availability',
+    element: <TutorAvailability/>
   }
 ]);
 

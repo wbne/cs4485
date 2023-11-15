@@ -33,6 +33,9 @@ function TutorHeader() {
 		      <Button key="Appointments" href="./appointments" sx={{ textTransform: 'none', marginRight: 5 }}>
 			<Typography color='black' fontFamily='Inter'>Appointments</Typography>
 		      </Button>
+			  <Button key="Availability" href="./availability" sx={{ textTransform: 'none', marginRight: 5 }}>
+			<Typography color='black' fontFamily='Inter'>Availability</Typography>
+		      </Button>
 		      <Button key="Profile" href="./profile" sx={{ textTransform: 'none', marginRight: 5 }}>
 			<Typography color='black' fontFamily='Inter'>Profile</Typography>
 		      </Button>
