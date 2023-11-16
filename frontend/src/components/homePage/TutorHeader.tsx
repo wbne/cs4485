@@ -8,6 +8,9 @@ import "@fontsource/playfair-display";
 import "@fontsource/inter";
 
 function TutorHeader() {
+
+	//since we know it'll all be tutor pages we can hardcode.
+
   return (
     <AppBar position="absolute">
       <Container maxWidth="xl" sx={{color: 'black',backgroundColor: '#D9F4EF'}}>
@@ -30,13 +33,13 @@ function TutorHeader() {
 			</Box>
 			<Box>
 			<>
-		      <Button key="Appointments" href="./appointments" sx={{ textTransform: 'none', marginRight: 5 }}>
+		      <Button key="Appointments" href="/tutor/appointments" sx={{ textTransform: 'none', marginRight: 5 }}>
 			<Typography color='black' fontFamily='Inter'>Appointments</Typography>
 		      </Button>
-			  <Button key="Availability" href="./availability" sx={{ textTransform: 'none', marginRight: 5 }}>
+			  <Button key="Availability" href="/tutor/availability" sx={{ textTransform: 'none', marginRight: 5 }}>
 			<Typography color='black' fontFamily='Inter'>Availability</Typography>
 		      </Button>
-		      <Button key="Profile" href="./profile" sx={{ textTransform: 'none', marginRight: 5 }}>
+		      <Button key="Profile" href="/tutor/profile" sx={{ textTransform: 'none', marginRight: 5 }}>
 			<Typography color='black' fontFamily='Inter'>Profile</Typography>
 		      </Button>
 			</>

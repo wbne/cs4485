@@ -4,6 +4,21 @@ import Button from '@mui/material/Button';
 import './forms.css';
 
 function LoginForm() {
+
+	//checks to see if a token exists and if so, when it was made
+	let session = localStorage.getItem("lastLoggedIn");
+	if(session != null) {
+		if(Number(session) > 0) {
+			localStorage.setItem("lastLoggedIn", (Number(session) - 1) + "");
+			const currentURL = "" + window.location;
+			const newURL = currentURL.replaceAll("login", "home");
+			window.location.assign(newURL);
+		}
+		else {
+			localStorage.removeItem("lastLoggedIn");
+		}
+	}
+
   // Define state variables to store form data
   const [formData, setFormData] = useState({
     email: '',
@@ -23,7 +38,10 @@ function LoginForm() {
     // 		Else return the error
     //event.preventDefault();
     console.log('Form Data:', formData);
-    
+	localStorage.setItem("lastLoggedIn", "3");
+	const currentURL = "" + window.location;
+	const newURL = currentURL.replaceAll("login", "home");
+   	window.location.assign(newURL);
   };
 
   return (
@@ -61,7 +79,6 @@ function LoginForm() {
         variant="contained"
         color="primary"
         fullWidth
-	href="./home"
 	onClick={handleSubmit}
       >
         Log In
