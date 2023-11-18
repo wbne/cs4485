@@ -63,7 +63,7 @@ function LoginForm() {
     //TODO: Add logic to see if user is validated.
     // 		If they are then redirect
     // 		Else return the error
-    // For sake of logging in, do janedoe@gmail.com and password123
+    // For sake of logging in, do johndoe@gmail.com and password123
     event.preventDefault();
     let isValidUser = false;
 
