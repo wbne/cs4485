@@ -11,14 +11,17 @@ function LoginForm() {
 	//checks to see if a token exists and if so, when it was made
 	let session = localStorage.getItem("lastLoggedIn");
 	if(session != null) {
-		if(Number(session) > 0) {
-			localStorage.setItem("lastLoggedIn", (Number(session) - 1) + "");
+		let nanoseconds = new Date();
+		let seconds = Math.floor(nanoseconds.getTime() / 1000);
+		if(Number(session) >= seconds) {
+			//localStorage.setItem("lastLoggedIn", (Number(session) - 1) + "");
 			const currentURL = "" + window.location;
 			const newURL = currentURL.replaceAll("login", "home");
 			window.location.assign(newURL);
 		}
 		else {
-			localStorage.removeItem("lastLoggedIn");
+			// Session Access Control will handle this
+			//localStorage.removeItem("lastLoggedIn");
 		}
 	}
 
@@ -70,7 +73,9 @@ function LoginForm() {
     userInfo.map((value: any) => {
       if (value.username === formData.email && value.password === formData.password) {
         isValidUser = true;
-        localStorage.setItem("lastLoggedIn", "3");
+	let nanoseconds = new Date();
+	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 3600;
+        localStorage.setItem("lastLoggedIn", "" + expirationTime);
         const currentURL = "" + window.location;
         const newURL = currentURL.replaceAll("login", "home");
         setError(false);
