@@ -114,7 +114,7 @@ export default function FindTutorPage() {
                                             </div>
                                         </div>
                                         <div className='pr-5'>
-                                            <Button sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
+                                            <Button href={'/appointments/book'} sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
                                                 <Typography fontFamily='Inter' textTransform='none'>Book</Typography>
                                             </Button>
                                             <Button sx={{backgroundColor: '#7E729F', color: 'white', height: '30px', '&:hover': {

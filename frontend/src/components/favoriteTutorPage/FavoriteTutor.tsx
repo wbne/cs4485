@@ -1,4 +1,6 @@
-import { Box, Typography, Button, TextField, Autocomplete, Avatar, styled, alpha, TextFieldProps, OutlinedInputProps, OutlinedInput } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Button, Avatar} from '@mui/material';
+import { Dialog, DialogContent, DialogActions } from '@mui/material';
 
 import "@fontsource/playfair-display";
 import "@fontsource/inter";
@@ -12,12 +14,34 @@ interface Tutors {
 }
 
 export default function FavoriteTutorPage() {
-    const tutors: readonly Tutors[] = [
-        {name: 'Lokesh', topic: 'CS'},
-        {name: 'Ben', topic: 'Math'},
-        {name: 'Preesha', topic: 'English'}
-    ];
+    const [tutors, setTutors] = useState<readonly Tutors[]>([
+        { name: 'Lokesh', topic: 'CS' },
+        { name: 'Ben', topic: 'Math' },
+        { name: 'Preesha', topic: 'English' },
+      ]);
     
+    const [selectedTutor, setSelectedTutor] = useState<Tutors | null>(null);
+    const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  
+    const handleDeleteClick = (tutor: Tutors) => {
+      setSelectedTutor(tutor);
+      setDeleteDialogOpen(true);
+    };
+  
+    const handleCancelDelete = () => {
+      setDeleteDialogOpen(false);
+      setSelectedTutor(null);
+    };
+  
+    const handleConfirmDelete = () => {
+      if (selectedTutor) {
+        const updatedTutors = tutors.filter((tutor) => tutor !== selectedTutor);
+        setTutors(updatedTutors);
+        setDeleteDialogOpen(false);
+        setSelectedTutor(null);
+      }
+    };
+
     return (
         <div className='flex flex-row' style={{height: '100vh', width: '100vw',}}>
             <div style={{paddingLeft: '4rem', paddingTop: '6rem'}}>
@@ -39,10 +63,14 @@ export default function FavoriteTutorPage() {
                                             </div>
                                         </div>
                                         <div className='pr-5'>
-                                            <Button sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
+                                            <Button 
+                                                href={'/appointments/book'}
+                                                sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
                                                 <Typography fontFamily='Inter' textTransform='none'>Book</Typography>
                                             </Button>
-                                            <Button sx={{backgroundColor: '#F0B8B8', color: 'black', height: '30px', '&:hover': {
+                                            <Button 
+                                                onClick={() => handleDeleteClick(tutor)}
+                                                sx={{backgroundColor: '#F0B8B8', color: 'black', height: '30px', '&:hover': {
                                                 backgroundColor: 'white',
                                                 color: '#black'
                                             }}}>
@@ -55,6 +83,25 @@ export default function FavoriteTutorPage() {
                         })}
                 </div>
             </div>
+
+             {/* Delete Confirmation Dialog */}
+            <Dialog open={isDeleteDialogOpen} onClose={handleCancelDelete}>
+                <DialogActions>
+                    <DialogContent>
+                        <Typography fontFamily={'Inter'} sx={{ fontWeight: 'normal', textAlign: 'center', mb: 2 }}>
+                            Are you sure you want to delete{' '}
+                            <Typography component="span" fontFamily={'Inter'} sx={{ color: '#7D729E', fontWeight: 'bold' }}>
+                            {selectedTutor?.name}
+                            </Typography>
+                            ?
+                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                            <Button onClick={handleCancelDelete} sx={{ mr: 2 }}>Cancel</Button>
+                            <Button onClick={handleConfirmDelete} sx={{ backgroundColor: '#F0B8B8', color: 'black' }}>Delete</Button>
+                        </Box>
+                    </DialogContent>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
