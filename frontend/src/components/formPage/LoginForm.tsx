@@ -1,9 +1,54 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './forms.css';
 
 function LoginForm() {
+  const [userInfo, setUserInfo] = useState([]);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+	//checks to see if a token exists and if so, when it was made
+	let session = localStorage.getItem("lastLoggedIn");
+	if(session != null) {
+		let nanoseconds = new Date();
+		let seconds = Math.floor(nanoseconds.getTime() / 1000);
+		if(Number(session) >= seconds) {
+			//localStorage.setItem("lastLoggedIn", (Number(session) - 1) + "");
+			const currentURL = "" + window.location;
+			const newURL = currentURL.replaceAll("login", "home");
+			window.location.assign(newURL);
+		}
+		else {
+			// Session Access Control will handle this
+			//localStorage.removeItem("lastLoggedIn");
+		}
+	}
+
+  useEffect(() => {
+    const apiUrl = 'http://ec2-54-242-100-57.compute-1.amazonaws.com:8080/users';
+
+    fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setUserInfo(data);
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Fetch error:', error);
+      });
+  }, []);
+
   // Define state variables to store form data
   const [formData, setFormData] = useState({
     email: '',
@@ -21,9 +66,27 @@ function LoginForm() {
     //TODO: Add logic to see if user is validated.
     // 		If they are then redirect
     // 		Else return the error
-    //event.preventDefault();
-    console.log('Form Data:', formData);
-    
+    // For sake of logging in, do johndoe@gmail.com and password123
+    event.preventDefault();
+    let isValidUser = false;
+
+    userInfo.map((value: any) => {
+      if (value.username === formData.email && value.password === formData.password) {
+        isValidUser = true;
+	let nanoseconds = new Date();
+	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 3600;
+        localStorage.setItem("lastLoggedIn", "" + expirationTime);
+        const currentURL = "" + window.location;
+        const newURL = currentURL.replaceAll("login", "home");
+        setError(false);
+        window.location.assign(newURL);
+      }
+    });
+
+    if (!isValidUser) {
+      setError(true);
+      setErrorMessage('Invalid username or password');
+    }
   };
 
   return (
@@ -39,6 +102,8 @@ function LoginForm() {
           type="email"
           value={formData.email}
           onChange={handleInputChange}
+          error={error}
+          helperText={error && errorMessage}
           variant="outlined"
           fullWidth
         />
@@ -61,7 +126,6 @@ function LoginForm() {
         variant="contained"
         color="primary"
         fullWidth
-	href="./home"
 	onClick={handleSubmit}
       >
         Log In
