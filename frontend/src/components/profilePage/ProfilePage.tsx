@@ -1,4 +1,4 @@
-import { Box, Typography, Button, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Box, Typography, Button, TextField, Dialog, DialogContent, DialogActions } from '@mui/material';
 import { useState } from 'react';
 
 export default function ProfilePage() {
@@ -16,7 +16,13 @@ export default function ProfilePage() {
         number: false,
         specialChar: false,
       });
-    
+    const passwordIsStrong =
+        passwordStrength.length &&
+        passwordStrength.uppercase &&
+        passwordStrength.lowercase &&
+        passwordStrength.number &&
+        passwordStrength.specialChar;
+
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
@@ -88,14 +94,11 @@ export default function ProfilePage() {
                     <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Student Account</Typography>
                 </Box>
             </div>
-            <div className='flex justify-center' style={{ height: '80%', width: '70%', paddingTop: '6rem' }}>
+            <div className='flex justify-center' style={{ height: '80%', width: '70%', paddingTop: '5rem' }}>
                 <div className='flex flex-col justify-around w-7/12'>
-
-                    {/* Added First and Last Name Display -- should be in DB */}
+                    
                     <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>FirstName</Typography>
                     <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>LastName</Typography>
-
-                    {/* Uneditable username */}
                     <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>username.email@given.com</Typography>
 
                     <div style={{width: '60%'}}>
@@ -125,16 +128,11 @@ export default function ProfilePage() {
                                     value={password}
                                     onChange={handlePasswordChange}
                                 />
-
                                 <Typography variant="body2" 
-                                    sx={{ marginTop: 1, color: passwordStrength.length && passwordStrength.uppercase && passwordStrength.lowercase && passwordStrength.number && passwordStrength.specialChar ? '#A6CAA9' : '#D32F2F' }}>
+                                    sx={{ marginTop: 1, color: passwordIsStrong ? '#A6CAA9' : '#D32F2F' }}>
                                     Password Strength: 
-                                        {passwordStrength.length && passwordStrength.uppercase && passwordStrength.lowercase && passwordStrength.number && passwordStrength.specialChar
-                                        ? ' Strong'
-                                        : ' Weak'
-                                        }
+                                        {passwordIsStrong ? ' Strong' : ' Weak' }
                                 </Typography>
-
                                 <TextField
                                     required
                                     id="confirmPwd"
@@ -144,19 +142,17 @@ export default function ProfilePage() {
                                     sx={{ width: '100%', mt: 2 }}
                                     value={confirmPassword}
                                     onChange={handleConfirmPasswordChange}
-                                    error={!passwordsMatch} // Add error prop based on password match condition
-                                    helperText={!passwordsMatch && 'Passwords do not match'} // Helper text for error condition
+                                    error={!passwordsMatch} 
+                                    helperText={!passwordsMatch && 'Passwords do not match'}
                                 />
-
                                 <Button
                                     sx={{ backgroundColor: '#A6CAA9', mt: 2 }}
-                                    disabled={!passwordsMatch} // Disable the button if passwords don't match
+                                    disabled={!passwordsMatch || !passwordIsStrong}
                                     variant="contained"
                                     onClick={handleSetNewPassword}
                                 >
                                     <Typography fontFamily='Inter' textTransform='none'>Set New Password</Typography>
                                 </Button>
-
                                 <Button
                                     sx={{ backgroundColor: '#000', color: '#fff', mt: 2, ml: 2}}
                                     variant="contained"
@@ -167,9 +163,7 @@ export default function ProfilePage() {
                             </>
                         )}
                     </div>
-                   
-                    
-
+                
                 </div>
             </div>
 
