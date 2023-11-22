@@ -1,5 +1,5 @@
 import Header from '../components/homePage/TutorHeader';
-import TutorProfilePage from '../components/tutorProfilePage/tutorProfilePage';
+import TutorProfilePage from '../components/tutorProfilePage/TutorProfilePage';
 import AccessControl from "../components/AccessControl";
 
 function TutorProfile() {
