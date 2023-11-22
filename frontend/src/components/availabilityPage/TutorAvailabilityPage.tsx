@@ -14,10 +14,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
 
 const availableTimes = [
-  '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM',
-  '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM',
-  '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM', '5:30 PM',
-  '6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM',
+  '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
+  '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', 
+  '5:00 PM', '6:00 PM', '7:00 PM',
 ];
 
 const TutorAvailability = () => {
@@ -69,7 +68,7 @@ const TutorAvailability = () => {
             Availabilities
           </Typography>
           <Typography fontFamily='Inter' width="80%" fontSize={18} fontWeight={'regular'}>
-            Select a date to view and update your available times. Tutoring sessions are in 30-minute intervals.
+            Select a date to view and update your available times. The duration of a turutoring session is 1 hour.
           </Typography>
         </Box>
       </div>
@@ -114,17 +113,17 @@ const TutorAvailability = () => {
         </div>
       </div>
 
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+      <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle fontFamily='Inter' fontSize={20} sx={{ textAlign: 'center' }}>Select/Deselect to Update Availability</DialogTitle>
         <DialogContent>
           <Typography fontFamily='Inter' fontSize={16} fontWeight={'bold'}>Morning:</Typography>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {availableTimes.slice(0, 8).map((time) => (
+            {availableTimes.slice(0, 4).map((time) => (
               <div key={time} onClick={() => handleToggleTime(time)} style={{ margin: '6px' }}>
                 <Button
                   variant="outlined"
                   disabled={getSelectedTimesForDate(value?.format('YYYY-MM-DD') || '').includes(time)}
-                  sx={{ color: '#7E729F', borderColor: '#7E729F' }}
+                  sx={{ color: '#7E729F', borderColor: '#7E729F', width: '100px' }}
                 >
                   {time}
                 </Button>
@@ -134,12 +133,12 @@ const TutorAvailability = () => {
 
           <Typography fontFamily='Inter' fontSize={16} sx={{ fontWeight: 'bold', mt: 2 }}>Afternoon:</Typography>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {availableTimes.slice(8, 16).map((time) => (
+            {availableTimes.slice(4, 9).map((time) => (
               <div key={time} onClick={() => handleToggleTime(time)} style={{ margin: '6px' }}>
                 <Button
                   variant="outlined"
                   disabled={getSelectedTimesForDate(value?.format('YYYY-MM-DD') || '').includes(time)}
-                  sx={{ color: '#7E729F', borderColor: '#7E729F' }}
+                  sx={{ color: '#7E729F', borderColor: '#7E729F', width: '100px' }}
                 >
                   {time}
                 </Button>
@@ -149,12 +148,12 @@ const TutorAvailability = () => {
 
           <Typography fontFamily='Inter' fontSize={16} sx={{ fontWeight: 'bold', mt: 2 }}>Evening:</Typography>
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {availableTimes.slice(16).map((time) => (
+            {availableTimes.slice(9).map((time) => (
               <div key={time} onClick={() => handleToggleTime(time)} style={{ margin: '6px' }}>
                 <Button
                   variant="outlined"
                   disabled={getSelectedTimesForDate(value?.format('YYYY-MM-DD') || '').includes(time)}
-                  sx={{ color: '#7E729F', borderColor: '#7E729F' }}
+                  sx={{ color: '#7E729F', borderColor: '#7E729F',  width: '100px' }}
                 >
                   {time}
                 </Button>
