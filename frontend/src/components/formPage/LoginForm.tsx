@@ -26,7 +26,7 @@ function LoginForm() {
 	}
 
   useEffect(() => {
-    const apiUrl = 'http://ec2-54-242-100-57.compute-1.amazonaws.com:8080/users';
+    const apiUrl = 'https://ec2-54-242-100-57.compute-1.amazonaws.com/users';
 
     fetch(apiUrl, {
       method: 'GET',
