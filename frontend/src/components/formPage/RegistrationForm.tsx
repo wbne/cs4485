@@ -50,9 +50,21 @@ function RegistrationForm() {
       <div>
         <TextField
           required
-          id="name"
-          name="name"
-          label="Name"
+          id="firstName"
+          name="firstName"
+          label="First Name"
+          value={formData.name}
+          onChange={handleInputChange}
+          variant="outlined"
+          fullWidth
+        />
+      </div>
+      <div>
+        <TextField
+          required
+          id="lastName"
+          name="lastName"
+          label="Last Name"
           value={formData.name}
           onChange={handleInputChange}
           variant="outlined"
