@@ -46,39 +46,3 @@ fieldset {
 .form .background-check {
 	padding: 20px;
 }
-
-.form .background-check-question {
-	padding: 10px;
-}
-
-.form > button[type="yesno"] {
-	height: 55px;
-	background-color: #7E729F;
-}
-
-.background-check-question button {
-	margin-top: 10px; 
-	background-color: #7E729F;
-	color: white;
-	margin-right: 20px;
-	font-size: small;
-  }
-
-  .background-check-question button:hover {
-	background-color: #4a3e52;
-  }
-
-  .yes.active {
-	background-color: blue;
-  }
-  
-  .no.active {
-	background-color: blue;
-  }
-  
-/*}
-  .background-check-question button.disabled {
-	background-color: rgb(185, 188, 180);
-	color: white;
-	cursor: not-allowed;
-  } */
