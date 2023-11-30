@@ -97,7 +97,8 @@ function RegistrationForm() {
           fullWidth
         />
       </div>
-      <div>
+      
+      {/* <div>
         <FormControl fullWidth variant="outlined">
           <InputLabel id="subject-label">Select a Subject</InputLabel>
           <Select
@@ -113,7 +114,7 @@ function RegistrationForm() {
             <MenuItem value="history">History</MenuItem>
           </Select>
         </FormControl>
-      </div>
+      </div> */}
       <Button
         type="submit"
         variant="contained"
