@@ -11,66 +11,76 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import './forms.css';
-import { red } from '@mui/material/colors';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 interface TutorFormData {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   subjects: string[];
-  experience: string;
+  abt: string;
   criminalBackgroundCheck: {
-    felony: boolean | undefined;
-    pendingCharges: boolean | undefined;
-    violenceTheftDishonesty: boolean | undefined;
-    otherConvictions: boolean | undefined;
+    felony: boolean;
+    pendingCharges: boolean;
+    violenceTheftDishonesty: boolean;
+    otherConvictions: boolean;
   };
 }
 
 function TutorRegistration() {
   const [formData, setFormData] = useState<TutorFormData>({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     subjects: [],
-    experience: '',
+    abt: '',
     criminalBackgroundCheck: {
-      felony: undefined,
-      pendingCharges: undefined,
-      violenceTheftDishonesty: undefined,
-      otherConvictions: undefined,
+      felony: true,
+      pendingCharges: true,
+      violenceTheftDishonesty: true,
+      otherConvictions: true,
     },
   });
-
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [isBackgroundCheckOpen, setBackgroundCheckOpen] = useState(false);
   const [isRegisterButtonDisabled, setRegisterButtonDisabled] = useState(true);
-  const [isBackgroundCheckDisabled, setBackgroundCheckDisabled] = useState(false)
+  const [isCheckButtonDisabled, setCheckButtonDisabled] = useState(false)
   const [displayFailNote, setDisplayFailNote] = useState(false);
+  const isbackgroundCheckFail =
+    formData.criminalBackgroundCheck.felony || 
+    formData.criminalBackgroundCheck.otherConvictions || 
+    formData.criminalBackgroundCheck.pendingCharges || 
+    formData.criminalBackgroundCheck.violenceTheftDishonesty;
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSelectChange = (event: ChangeEvent<{ value: unknown }>) => {
+  const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
     const selectedSubjects = event.target.value as string[];
     setFormData({ ...formData, subjects: selectedSubjects });
   };
 
   const handleBackgroundCheckOpen = () => {
     setBackgroundCheckOpen(true);
-    setCurrentStep(1);
+    setCurrentStep(0);
   };
 
   const handleBackgroundCheckClose = () => {
     setBackgroundCheckOpen(false);
     setCurrentStep(0);
   };
+  
+  const handleStartButton = () => {
+    setCurrentStep(currentStep + 1);
+  };
 
   const handleBackgroundCheckSubmit = () => {
-    // If "Yes" for check
-    if (formData.criminalBackgroundCheck.felony || formData.criminalBackgroundCheck.otherConvictions || formData.criminalBackgroundCheck.pendingCharges || formData.criminalBackgroundCheck.violenceTheftDishonesty) {
+    // if any background check question is true
+    if (isbackgroundCheckFail && currentStep == 4) {
       setRegisterButtonDisabled(true);
       setDisplayFailNote(true);
       handleBackgroundCheckClose();
@@ -81,7 +91,7 @@ function TutorRegistration() {
         handleBackgroundCheckClose();
         setRegisterButtonDisabled(false);
     }
-    setBackgroundCheckDisabled(true);
+    setCheckButtonDisabled(true);
   };
 
   const handleBackgroundCheckChange = (
@@ -99,7 +109,7 @@ function TutorRegistration() {
 
   const renderBackgroundCheckQuestion = () => {
     const questions = [
-      "Begin your background Check",
+      "Begin your background Check. Do not skip any questions",
       "Have you ever been convicted of a felony?",
       "Do you have any criminal charges pending against you?",
       "Have you ever been convicted of any crime related to violence, theft, or dishonesty?",
@@ -119,6 +129,10 @@ function TutorRegistration() {
     return (
       <div>
       <Typography variant="body1">{questions[currentStep]}</Typography>
+      {currentStep === 0 &&
+      (
+        <Button onClick={handleStartButton}>Start</Button>
+      )}
       {currentStep !== 0 && (
         <div>
           <Button 
@@ -152,7 +166,7 @@ function TutorRegistration() {
           id="firstName"
           name="firstName"
           label="First Name"
-          value={formData.name}
+          value={formData.firstName}
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
@@ -164,7 +178,7 @@ function TutorRegistration() {
           id="lastName"
           name="lastName"
           label="Last Name"
-          value={formData.name}
+          value={formData.lastName}
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
@@ -198,13 +212,14 @@ function TutorRegistration() {
       </div>
       <div>
         <FormControl fullWidth variant="outlined">
-          <InputLabel id="subjects-label">Select Subjects</InputLabel>
+          <InputLabel id="subjects-label">Select Subject</InputLabel>
           <Select
             labelId="subjects-label"
             id="subjects"
             name="subjects"
             multiple
             value={formData.subjects}
+            onChange={handleSelectChange}
             label="Select Subjects"
             renderValue={(selected) => (selected as string[]).join(', ')}
           >
@@ -223,27 +238,25 @@ function TutorRegistration() {
           label="About Me"
           multiline
           rows={4}
-          value={formData.experience}
+          value={formData.abt}
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
         />
       </div>
-
       <div className="background-check">
         <h1>Please complete the required background check</h1>
         <Button
           variant="contained"
-          //color="primary"
           onClick={handleBackgroundCheckOpen}
-          style={{marginTop: '10px',  backgroundColor: isBackgroundCheckDisabled ? 'gray' : 'black'}}
-          disabled={isBackgroundCheckDisabled}
+          style={{marginTop: '10px',  backgroundColor: isCheckButtonDisabled ? 'gray' : 'black'}}
+          disabled={isCheckButtonDisabled}
         >
           Background Check
         </Button>
       </div>
       
-      <Dialog open={isBackgroundCheckOpen} onClose={handleBackgroundCheckClose}>
+      <Dialog open={isBackgroundCheckOpen} /*onClose={handleBackgroundCheckClose}*/>
         <DialogTitle>Criminal Background Check</DialogTitle>
         <DialogContent>
           {renderBackgroundCheckQuestion()}
@@ -254,7 +267,6 @@ function TutorRegistration() {
           )}
         </DialogActions>
       </Dialog>
-
 
       <Button
         type="submit"
