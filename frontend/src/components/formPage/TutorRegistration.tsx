@@ -47,6 +47,8 @@ function TutorRegistration() {
   const [isBackgroundCheckOpen, setBackgroundCheckOpen] = useState(false);
   const [isRegisterButtonDisabled, setRegisterButtonDisabled] = useState(true);
   const [isCheckButtonDisabled, setCheckButtonDisabled] = useState(false)
+  const [isYesClicked, setIsYesClicked] = useState(false)
+  const [isNoClicked, setIsNoClicked] = useState(false)
   const [displayFailNote, setDisplayFailNote] = useState(false);
   const isbackgroundCheckFail =
     formData.criminalBackgroundCheck.felony || 
@@ -85,11 +87,15 @@ function TutorRegistration() {
       setDisplayFailNote(true);
       handleBackgroundCheckClose();
     } else {
-      if (currentStep < 4) 
+      if (currentStep < 4) {
         setCurrentStep(currentStep + 1);
-      else 
+        setIsNoClicked(false);
+        setIsYesClicked(false);
+      }
+      else {
         handleBackgroundCheckClose();
         setRegisterButtonDisabled(false);
+      }
     }
     setCheckButtonDisabled(true);
   };
@@ -98,6 +104,15 @@ function TutorRegistration() {
     name: keyof TutorFormData['criminalBackgroundCheck'],
     answer: 'yes' | 'no'
   ) => {
+    if (answer === 'yes') {
+      setIsYesClicked(true);
+      setIsNoClicked(false);
+    }
+    if (answer === 'no') {
+      setIsYesClicked(false);
+      setIsNoClicked(true);
+    }
+
     setFormData((prevData) => ({
       ...prevData,
       criminalBackgroundCheck: {
@@ -109,7 +124,7 @@ function TutorRegistration() {
 
   const renderBackgroundCheckQuestion = () => {
     const questions = [
-      "Begin your background Check. Do not skip any questions",
+      "Please answer all questions truthfully and do not skip any questions.",
       "Have you ever been convicted of a felony?",
       "Do you have any criminal charges pending against you?",
       "Have you ever been convicted of any crime related to violence, theft, or dishonesty?",
@@ -131,17 +146,17 @@ function TutorRegistration() {
       <Typography variant="body1">{questions[currentStep]}</Typography>
       {currentStep === 0 &&
       (
-        <Button onClick={handleStartButton}>Start</Button>
+        <Button sx={{color: '#7D729E'}} onClick={handleStartButton}>Click to Begin</Button>
       )}
       {currentStep !== 0 && (
         <div>
           <Button 
-            style={{ color: 'grey', marginRight: '20px'}}
+            style={{ backgroundColor: isNoClicked ? '#7D729E' : '', color: 'black', marginRight: '20px', marginTop: '10px'}}
             onClick={() => handleBackgroundCheckChange(currentAttributeName, 'no')}>
             No
           </Button>
           <Button 
-            style={{ color: 'grey',}}
+            style={{marginTop: '10px', color: 'black', backgroundColor: isYesClicked ? '#7D729E' : ''}}
             onClick={() => handleBackgroundCheckChange(currentAttributeName, 'yes')}>
             Yes
           </Button>
