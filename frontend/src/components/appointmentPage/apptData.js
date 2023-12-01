@@ -2,7 +2,7 @@ export const appointments = [
     {
         date: 'August 12, 2023',
         time: '8:30 AM',
-        tutorName: 'Jensen Ackles',
+        tutorName: 'Tara Warren',
         topic: 'Math',
         notes: 'I need to learn how to create a parabola',
     },

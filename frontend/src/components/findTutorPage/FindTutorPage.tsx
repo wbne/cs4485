@@ -5,22 +5,50 @@ import "@fontsource/inter";
 import '@fontsource/inter';
 import '@fontsource/inter/300.css';
 import pfp from '../../assets/pfp_temp.jpg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Tutors {
     name: string;
-    topic: string
+    topic: string;
+    aboutMe: string;
 }
 
 export default function FindTutorPage() {
+    const [tutors, setTutors] = useState<readonly Tutors[]>([]);
+
+    useEffect(() => {
+        // For sake of logging in, do johndoe@gmail.com and Password123$
+        const apiUrl = 'https://ec2-54-242-100-57.compute-1.amazonaws.com/tutors';
+    
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            const tutorArray = data.map((value: any) => ({
+                name: value.firstName + " " + value.lastName,
+                topic: value.subjectList[0],
+                aboutMe: value.aboutMe
+            }));
+
+            setTutors(tutorArray);
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+          });
+      }, []);
+
     const [tutorName, setTutorName] = useState<string>('');
     const [area, setArea] = useState<string>('');
-
-    const tutors: readonly Tutors[] = [
-        {name: 'Lokesh', topic: 'CS',},
-        {name: 'Ben', topic: 'Math'},
-        {name: 'Preesha', topic: 'English'}
-    ];
 
     const handleTutorChange = (event: React.ChangeEvent<{}>, newTutor: string) => {
         setTutorName(newTutor);
@@ -62,7 +90,7 @@ export default function FindTutorPage() {
                         onInputChange={handleTutorChange}
                         filterOptions={filterTutor}
                         options={tutors}
-                        getOptionLabel={(option: Tutors) => option.name}
+                        getOptionLabel={(option) => option.name}
                         sx={{ width: 200, ml: 2 }}
                         renderInput={(params) =>
                             <TextField 
@@ -110,13 +138,13 @@ export default function FindTutorPage() {
                                             <div className='pl-3 flex flex-col'>
                                                 <Typography fontSize={20} fontWeight='bold' fontFamily={'Inter'} sx={{marginBottom: 1}}>{tutor.name}</Typography>
                                                 <Typography fontSize={15} fontWeight='normal' fontFamily={'Inter'} sx={{marginBottom: 1}}><span style={{ backgroundColor: '#D9D9D9', padding: 5, borderRadius: 5 }}>{tutor.topic}</span></Typography>
-                                                <Typography fontSize={15} fontWeight='lighter' fontFamily={'Inter'}>More Information from "About Me" section</Typography>
+                                                <Typography fontSize={15} fontWeight='lighter' fontFamily={'Inter'}>{tutor.aboutMe}</Typography>
                                             </div>
                                         </div>
                                         <div className='pr-5'>
-                                            <Button href={'/appointments/book'} sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
+                                            <Link to={'/appointments/book'} state={{ tutorName: tutor.name, tutorSubject: tutor.topic }} style={{backgroundColor: '#A6CAA9', color: 'black', marginRight:2, height: '30px'}}>
                                                 <Typography fontFamily='Inter' textTransform='none'>Book</Typography>
-                                            </Button>
+                                            </Link>
                                             <Button sx={{backgroundColor: '#7E729F', color: 'white', height: '30px', '&:hover': {
                                                 backgroundColor: '#fff',
                                                 color: '#7E729F'

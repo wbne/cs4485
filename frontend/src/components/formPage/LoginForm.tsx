@@ -26,7 +26,8 @@ function LoginForm() {
 	}
 
   useEffect(() => {
-    const apiUrl = 'https://ec2-54-242-100-57.compute-1.amazonaws.com/users';
+    // For sake of logging in, do student1@gmail.com and Password123$
+    const apiUrl = 'https://ec2-34-224-29-186.compute-1.amazonaws.com/students';
 
     fetch(apiUrl, {
       method: 'GET',
@@ -66,7 +67,7 @@ function LoginForm() {
     //TODO: Add logic to see if user is validated.
     // 		If they are then redirect
     // 		Else return the error
-    // For sake of logging in, do johndoe@gmail.com and password123
+    
     event.preventDefault();
     let isValidUser = false;
 
@@ -74,7 +75,7 @@ function LoginForm() {
       if (value.username === formData.email && value.password === formData.password) {
         isValidUser = true;
 	let nanoseconds = new Date();
-	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 3600;
+	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 36000;
         localStorage.setItem("lastLoggedIn", "" + expirationTime);
         const currentURL = "" + window.location;
         const newURL = currentURL.replaceAll("login", "home");

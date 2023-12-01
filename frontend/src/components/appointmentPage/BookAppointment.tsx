@@ -11,15 +11,26 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { appointments } from './apptData';
+import { useLocation } from 'react-router-dom';
+
+interface Tutors {
+    tutorId: number;
+    topic: string;
+    aboutMe: string;
+}
 
 export default function BookAppointment() {
-    const [subject, setSubject] = useState('');
-    const [tutor, setTutor] = useState('');
+    const location = useLocation();
+    const { tutorName, tutorSubject } = location.state;
+    const [subject, setSubject] = useState(tutorSubject);
+    const [tutor, setTutor] = useState(tutorName);
     const [value, setValue] = useState<Dayjs | null>();
     const [extraInfo, setExtraInfo] = useState('');
 
     const [names, setNames] = useState<string[]>([]);
     const [subjects, setSubjects] = useState<string[]>([]);
+
+    const [appointment, setAppointment] = useState<readonly Tutors[]>([]);
 
     const handleSubjectChange = (event: React.ChangeEvent<{}>, newSubject: string) => {
         setSubject(newSubject);
@@ -30,21 +41,48 @@ export default function BookAppointment() {
     };
 
     useEffect(() => {
-        appointments.map((subj) => {
-            if (!subjects.includes(subj.topic)) {
-                setSubjects([
-                    ...subjects,
-                    subj.topic
-                ])
-            }
-            if (!names.includes(subj.tutorName)) {
-                setNames([
-                    ...names,
-                    subj.tutorName
-                ])
-            }
+        // For sake of logging in, do johndoe@gmail.com and Password123$
+        const apiUrl = 'https://ec2-34-224-29-186.compute-1.amazonaws.com/tutors';
+    
+        fetch(apiUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
-    });
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            appointments.map((subj) => {
+                if (!subjects.includes(subj.topic)) {
+                    setSubjects([
+                        ...subjects,
+                        subj.topic
+                    ])
+                }
+                if (!names.includes(subj.tutorName)) {
+                    setNames([
+                        ...names,
+                        subj.tutorName
+                    ])
+                }
+            })
+            const tutorArray = data.map((value: any) => ({
+                name: value.firstName + " " + value.lastName,
+                topic: value.subjectList[0],
+                aboutMe: value.aboutMe
+            }));
+
+            setAppointment(tutorArray);
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+          });
+      }, []);
 
     return (
         <div className='flex flex-row' style={{height: '100%', width: '100vw',}}>
@@ -84,7 +122,7 @@ export default function BookAppointment() {
                     <div className='flex flex-row justify-between w-7/12'>
                         <Typography fontFamily='Inter'>Tutor</Typography>
                         <Autocomplete
-                            id="subject"
+                            id="tutor"
                             ListboxProps={{
                                 style:{
                                     maxHeight: '30vh',
