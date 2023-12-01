@@ -16,27 +16,29 @@ import { useLocation } from 'react-router-dom';
 interface Tutors {
     tutorId: number;
     topic: string;
-    aboutMe: string;
+    name: string;
+    availableHours: string[];
 }
 
 export default function BookAppointment() {
     const location = useLocation();
     const { tutorName, tutorSubject } = location.state;
-    const [subject, setSubject] = useState(tutorSubject);
-    const [tutor, setTutor] = useState(tutorName);
+    const [subject, setSubject] = useState('');
+    const [tutor, setTutor] = useState('');
     const [value, setValue] = useState<Dayjs | null>();
-    const [extraInfo, setExtraInfo] = useState('');
 
     const [names, setNames] = useState<string[]>([]);
-    const [subjects, setSubjects] = useState<string[]>([]);
+    const [subjects, setSubjects] = useState<string[]>(['Math', 'Science', 'Potato']);
 
-    const [appointment, setAppointment] = useState<readonly Tutors[]>([]);
-
-    const handleSubjectChange = (event: React.ChangeEvent<{}>, newSubject: string) => {
-        setSubject(newSubject);
+    const handleSubjectChange = (event: any, newSubject: string) => { // React.ChangeEvent<{}>
+        console.log("newSubject", newSubject);
+        setSubject(newSubject ?? '');
     };
 
-    const handleTutorChange = (event: React.ChangeEvent<{}>, newTutor: string) => {
+    const handleTutorChange = (event: any, newTutor: string) => { // React.ChangeEvent<{}>
+        // if(!newTutor)
+        //     return;
+        console.log("newTutor", newTutor);
         setTutor(newTutor);
     };
 
@@ -57,27 +59,38 @@ export default function BookAppointment() {
             return response.json();
           })
           .then(data => {
-            appointments.map((subj) => {
-                if (!subjects.includes(subj.topic)) {
-                    setSubjects([
-                        ...subjects,
-                        subj.topic
-                    ])
-                }
-                if (!names.includes(subj.tutorName)) {
-                    setNames([
-                        ...names,
-                        subj.tutorName
-                    ])
-                }
-            })
+            // appointments.map((subj) => {
+            //     if (!subjects.includes(subj.topic)) {
+            //         setSubjects([
+            //             ...subjects,
+            //             subj.topic
+            //         ])
+            //     }
+            //     if (!names.includes(subj.tutorName)) {
+            //         setNames([
+            //             ...names,
+            //             subj.tutorName
+            //         ])
+            //     }
+            // })
             const tutorArray = data.map((value: any) => ({
                 name: value.firstName + " " + value.lastName,
                 topic: value.subjectList[0],
-                aboutMe: value.aboutMe
+                availableHours: value.availableHours,
+                tutorId: value.id
             }));
 
-            setAppointment(tutorArray);
+            const subjectsToAdd = tutorArray.filter((subj: any) => !subjects.includes(subj.topic));
+            const namesToAdd = tutorArray.filter((subj: any) => !names.includes(subj.name));
+            
+            // setSubjects(subjectsToAdd.map((subj: any) => subj.topic));
+            setNames(namesToAdd.map((subj: any) => subj.name));
+
+            setTutor(tutorName);
+            setSubject(tutorSubject);
+
+            handleSubjectChange("", tutorSubject);
+            handleTutorChange("", tutorName);
           })
           .catch(error => {
             console.error('Fetch error:', error);
@@ -104,7 +117,7 @@ export default function BookAppointment() {
                                     fontFamily: 'Poppins'
                                 }
                             }}
-                            inputValue={subject}
+                            value={subject}
                             onInputChange={handleSubjectChange}
                             // filterOptions={filterSubject}
                             options={subjects}
@@ -129,7 +142,7 @@ export default function BookAppointment() {
                                     fontFamily: 'Poppins'
                                 }
                             }}
-                            inputValue={tutor}
+                            value={tutor}
                             onInputChange={handleTutorChange}
                             options={names}
                             getOptionLabel={(option: string) => option}
@@ -155,21 +168,6 @@ export default function BookAppointment() {
                                 fixedWeekNumber={5} 
                                 views={['year', 'month', 'day']}/>
                         </LocalizationProvider>
-                    </div>
-                    <div className='flex flex-col'>
-                        <Typography fontFamily='Inter' textTransform='none'>Write a note to your tutor about what you want to learn</Typography>
-                        <TextField
-                        InputProps={{style: {background: 'white'}}}
-                        value={extraInfo}
-                        required
-                        id="note"
-                        variant='filled'
-                        label=""
-                        sx={{width: '100%'}}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            setExtraInfo(event.target.value);
-                        }}
-                        />
                     </div>
                     <div className='flex flex-row justify-center'>
                         <Button sx={{backgroundColor: '#A6CAA9', color: 'black', ml: 2, '&:hover': {
