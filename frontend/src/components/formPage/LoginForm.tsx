@@ -2,6 +2,7 @@ import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './forms.css';
+import API_URL from '../FakeENV';
 
 function LoginForm() {
   const [userInfo, setUserInfo] = useState([]);
@@ -27,7 +28,7 @@ function LoginForm() {
 
   useEffect(() => {
     // For sake of logging in, do student1@gmail.com and Password123$
-    const apiUrl = 'https://ec2-34-224-29-186.compute-1.amazonaws.com/students';
+    const apiUrl = API_URL() + 'students';
 
     fetch(apiUrl, {
       method: 'GET',
