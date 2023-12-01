@@ -8,7 +8,8 @@ import Select from '@mui/material/Select';
 import './forms.css';
 
 interface FormData {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   subject: string;
@@ -17,7 +18,8 @@ interface FormData {
 function RegistrationForm() {
   // Define state variables to store form data
   const [formData, setFormData] = useState<FormData>({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     subject: '',
@@ -53,7 +55,7 @@ function RegistrationForm() {
           id="firstName"
           name="firstName"
           label="First Name"
-          value={formData.name}
+          value={formData.firstName}
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
@@ -65,7 +67,7 @@ function RegistrationForm() {
           id="lastName"
           name="lastName"
           label="Last Name"
-          value={formData.name}
+          value={formData.lastName}
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
