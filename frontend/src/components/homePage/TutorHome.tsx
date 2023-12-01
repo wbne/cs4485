@@ -13,6 +13,7 @@ const boxesData = [
   ];
 
 export default function TutorHome() {
+	const firstName = localStorage.getItem("firstName");
 	
   return (
 		<div style={{ backgroundColor: 'white', paddingTop: '4rem'}}>
@@ -23,7 +24,7 @@ export default function TutorHome() {
 				height="30vh" 
 				alignItems="center"
 			>
-   				<Typography fontFamily='Playfair Display' sx={{fontSize:{xs:60, md:80}}} fontWeight='medium'>Welcome, Tutor Username!</Typography>
+   				<Typography fontFamily='Playfair Display' sx={{fontSize:{xs:60, md:80}}} fontWeight='medium'>Welcome, Tutorkeshian {firstName}!</Typography>
     			<Typography fontFamily='Inter' sx={{fontSize:{xs:20, md:30}}} fontWeight='normal'>Continue making on impact on the next generation!</Typography>
 			</Box>
 			

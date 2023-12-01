@@ -13,6 +13,7 @@ const boxesData = [
   ];
 
 export default function LandingPageBody() {
+	const firstName = localStorage.getItem("firstName");
 	
   return (
 	
@@ -24,7 +25,7 @@ export default function LandingPageBody() {
 				height="35vh" 
 				alignItems="center"
 			>
-   				<Typography fontFamily='Playfair Display' sx={{fontSize:{xs:60, md:80}}} fontWeight='medium'>Welcome, Username!</Typography>
+   				<Typography fontFamily='Playfair Display' sx={{fontSize:{xs:60, md:80}}} fontWeight='medium'>Welcome, {firstName}!</Typography>
     			<Typography fontFamily='Inter' sx={{fontSize:{xs:20, md:30}}} fontWeight='normal'>Continue your learning through tutoring</Typography>
 			</Box>
 			

@@ -90,6 +90,9 @@ export default function TutorProfilePage() {
         setOpenDialog(false);
     };
 
+	const firstName = localStorage.getItem("firstName");
+	const lastName = localStorage.getItem("lastName");
+	const email = localStorage.getItem("email");
 
     return (
         <div className='flex flex-row' style={{height: '100vh', width: '100vw',}}>
@@ -97,16 +100,16 @@ export default function TutorProfilePage() {
             <div style={{backgroundColor: 'rgba(217, 217, 217, 0.37)', width:'40%', paddingLeft: '4rem', paddingTop: '6rem', height: '100%'}}>
                 <Box>
                     <Typography fontFamily='Playfair Display' fontSize={60} fontWeight='medium'>Profile</Typography>
-                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Tutor Account</Typography>
+                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>Tutorkeshian Account</Typography>
                 </Box>
             </div>
 
             <div className='flex flex-row justify-center' style={{height: '80%', width: '70%', paddingTop: '5rem'}}>
                 <div className='flex flex-col justify-around w-7/12'>
 
-                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>FirstName</Typography>
-                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>LastName</Typography>
-                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>username.email@given.com</Typography>
+                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>{firstName}</Typography>
+                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>{lastName}</Typography>
+                    <Typography fontFamily='Inter' fontSize={20} fontWeight={'regular'}>{email}</Typography>
 
                     {/* Label should read the tutor about me filled in registration */}
                     <TextField
