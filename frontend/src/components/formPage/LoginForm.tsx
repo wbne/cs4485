@@ -78,6 +78,9 @@ function LoginForm() {
 	let nanoseconds = new Date();
 	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 36000;
         localStorage.setItem("lastLoggedIn", "" + expirationTime);
+	localStorage.setItem("firstName", "" + value.firstName);
+	localStorage.setItem("lastName", "" + value.lastName);
+	localStorage.setItem("email", "" + value.username);
         const currentURL = "" + window.location;
         const newURL = currentURL.replaceAll("login", "home");
         setError(false);
