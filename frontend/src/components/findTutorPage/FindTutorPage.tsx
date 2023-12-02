@@ -19,7 +19,7 @@ export default function FindTutorPage() {
 
     useEffect(() => {
         // For sake of logging in, do johndoe@gmail.com and Password123$
-        const apiUrl = 'https://ec2-54-242-100-57.compute-1.amazonaws.com/tutors';
+        const apiUrl = 'https://ec2-34-224-29-186.compute-1.amazonaws.com/tutors';
     
         fetch(apiUrl, {
           method: 'GET',
