@@ -1,7 +1,7 @@
 # cs4485
 we ball
 
-# Components
+# Code Contributions for Components
 
 - **Appointment Page**
   - Appointment Page
