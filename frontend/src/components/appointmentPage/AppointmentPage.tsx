@@ -6,6 +6,7 @@ import "@fontsource/playfair-display";
 import "@fontsource/inter";
 import '@fontsource/inter';
 import '@fontsource/inter/300.css';
+import { Link } from 'react-router-dom';
 
 const AppointmentsBox = styled(Box)(({ theme }) => ({
     backgroundColor: 'rgba(217, 217, 217, 0.5)',
@@ -24,7 +25,7 @@ const AppointmentsPage = () => {
             <Box pl={5} pt={6}>
                 <Box padding={2}>
                     <Typography fontFamily='Playfair Display' sx={{ fontSize: { xs: 40, md: 60 }, mb: 2 }} fontWeight='medium'>Appointments</Typography>
-                    <Button href={'/appointments/book'} sx={{
+                    <Button sx={{
                         backgroundColor: '#7D729E',
                         color: 'white',
                         mr: 4,
@@ -32,7 +33,9 @@ const AppointmentsPage = () => {
                         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
                         textTransform: 'none', '&:hover': { backgroundColor: 'white', color: '#7D729E' }
                     }}>
-                        <Typography fontFamily='Inter' fontWeight='light'>Book New Appointment</Typography>
+                        <Link to={'/appointments/book'} state={{tutorName: '', tutorSubject: ''}}>
+                            <Typography fontFamily='Inter' fontWeight='light'>Book New Appointment</Typography>
+                        </Link>
                     </Button>
                 </Box>
 

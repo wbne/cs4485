@@ -12,6 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
 import { appointments } from './apptData';
 import { useLocation } from 'react-router-dom';
+import API_URL from '../FakeENV';
 
 interface Tutors {
     tutorId: number;
@@ -31,20 +32,16 @@ export default function BookAppointment() {
     const [subjects, setSubjects] = useState<string[]>(['Math', 'Science', 'Potato']);
 
     const handleSubjectChange = (event: any, newSubject: string) => { // React.ChangeEvent<{}>
-        console.log("newSubject", newSubject);
         setSubject(newSubject ?? '');
     };
 
     const handleTutorChange = (event: any, newTutor: string) => { // React.ChangeEvent<{}>
-        // if(!newTutor)
-        //     return;
-        console.log("newTutor", newTutor);
         setTutor(newTutor);
     };
 
+    const apiUrl = API_URL() + '/students';
     useEffect(() => {
         // For sake of logging in, do johndoe@gmail.com and Password123$
-        const apiUrl = 'https://ec2-34-224-29-186.compute-1.amazonaws.com/tutors';
     
         fetch(apiUrl, {
           method: 'GET',
@@ -59,20 +56,6 @@ export default function BookAppointment() {
             return response.json();
           })
           .then(data => {
-            // appointments.map((subj) => {
-            //     if (!subjects.includes(subj.topic)) {
-            //         setSubjects([
-            //             ...subjects,
-            //             subj.topic
-            //         ])
-            //     }
-            //     if (!names.includes(subj.tutorName)) {
-            //         setNames([
-            //             ...names,
-            //             subj.tutorName
-            //         ])
-            //     }
-            // })
             const tutorArray = data.map((value: any) => ({
                 name: value.firstName + " " + value.lastName,
                 topic: value.subjectList[0],
@@ -119,7 +102,6 @@ export default function BookAppointment() {
                             }}
                             value={subject}
                             onInputChange={handleSubjectChange}
-                            // filterOptions={filterSubject}
                             options={subjects}
                             getOptionLabel={(option: string) => option}
                             sx={{ width: 200, ml: 2 }}
