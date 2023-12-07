@@ -28,7 +28,10 @@ function LoginForm() {
 
   useEffect(() => {
     // For sake of logging in, do student1@gmail.com and Password123$
-    const apiUrl = API_URL() + '/students';
+    let apiUrl = API_URL() + '/students';
+    if(window.location.href.indexOf("tutor") != -1) {
+		apiUrl = API_URL() + '/tutors';		
+	}
 
     fetch(apiUrl, {
       method: 'GET',
@@ -65,10 +68,6 @@ function LoginForm() {
 
   // Handle form submission
   const handleSubmit = (event: any) => {
-    //TODO: Add logic to see if user is validated.
-    // 		If they are then redirect
-    // 		Else return the error
-    
     event.preventDefault();
     let isValidUser = false;
 
