@@ -1,5 +1,6 @@
-# cs4485
-we ball
+# CS4485
+Team 62
+Front-end
 
 # Code Contributions for Components
 
