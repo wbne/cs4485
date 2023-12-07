@@ -28,7 +28,7 @@ function LoginForm() {
 
   useEffect(() => {
     // For sake of logging in, do student1@gmail.com and Password123$
-    const apiUrl = API_URL() + 'students';
+    const apiUrl = API_URL() + '/students';
 
     fetch(apiUrl, {
       method: 'GET',
@@ -81,6 +81,7 @@ function LoginForm() {
 	localStorage.setItem("firstName", "" + value.firstName);
 	localStorage.setItem("lastName", "" + value.lastName);
 	localStorage.setItem("email", "" + value.username);
+	localStorage.setItem("id", "" + value.id);
         const currentURL = "" + window.location;
         const newURL = currentURL.replaceAll("login", "home");
         setError(false);

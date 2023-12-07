@@ -8,6 +8,7 @@ export default function AccessControl() {
 		localStorage.removeItem("lastName");
 		localStorage.removeItem("firstName");
 		localStorage.removeItem("email");
+		localStorage.removeItem("id");
 		const currentURL = "" + window.location.origin;
 		window.location.assign(currentURL);
 	}

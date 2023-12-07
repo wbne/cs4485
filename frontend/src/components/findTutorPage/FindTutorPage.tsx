@@ -7,20 +7,21 @@ import '@fontsource/inter/300.css';
 import pfp from '../../assets/pfp_temp.jpg';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import API_URL from '../FakeENV';
 
 interface Tutors {
     name: string;
     topic: string;
     aboutMe: string;
+    id: number;
 }
 
 export default function FindTutorPage() {
     const [tutors, setTutors] = useState<readonly Tutors[]>([]);
+    const apiUrl = API_URL() + '/tutors';
 
     useEffect(() => {
         // For sake of logging in, do johndoe@gmail.com and Password123$
-        const apiUrl = 'https://ec2-34-224-29-186.compute-1.amazonaws.com/tutors';
-    
         fetch(apiUrl, {
           method: 'GET',
           headers: {
@@ -37,7 +38,8 @@ export default function FindTutorPage() {
             const tutorArray = data.map((value: any) => ({
                 name: value.firstName + " " + value.lastName,
                 topic: value.subjectList[0],
-                aboutMe: value.aboutMe
+                aboutMe: value.aboutMe,
+		id: value.id
             }));
 
             setTutors(tutorArray);
@@ -69,6 +71,23 @@ export default function FindTutorPage() {
             .filter(option => option.name.toLowerCase().includes(state.inputValue.toLowerCase()))
             .sort((a, b) => a.name.localeCompare(b.name)); // Sort alphabetically
     };
+
+	const likeTutor = (event:any) => {
+		let studentId = localStorage.getItem("id");;
+		let tutorId = Number(event.target.id);
+		fetch(API_URL() + "/users/" + studentId + "/favorites/add?tutorId=" + tutorId, {
+		  method: "post",
+		  headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json'
+		  },
+
+		})
+		.then( (response) => { 
+			event.target.innerHTML = "Liked!";
+		});
+
+	}
     
     return (
         <div className='flex flex-row' style={{height: '100vh', width: '100vw',}}>
@@ -145,11 +164,11 @@ export default function FindTutorPage() {
                                             <Link to={'/appointments/book'} state={{ tutorName: tutor.name, tutorSubject: tutor.topic }} style={{backgroundColor: '#A6CAA9', color: 'black', marginRight:2, height: '30px'}}>
                                                 <Typography fontFamily='Inter' textTransform='none'>Book</Typography>
                                             </Link>
-                                            <Button sx={{backgroundColor: '#7E729F', color: 'white', height: '30px', '&:hover': {
+                                            <Button onClick={likeTutor} sx={{backgroundColor: '#7E729F', color: 'white', height: '30px', '&:hover': {
                                                 backgroundColor: '#fff',
                                                 color: '#7E729F'
                                             }}}>
-                                                <Typography fontFamily='Inter' textTransform='none'>Like</Typography>
+                                                <Typography id={""+tutor.id} fontFamily='Inter' textTransform='none'>Like</Typography>
                                             </Button>
                                         </div>
                                     </div>
