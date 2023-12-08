@@ -1,4 +1,4 @@
-import Header from '../components/findTutorPage/Header';
+import Header from '../components/homePage/Header';
 import FindTutorPage from '../components/findTutorPage/FindTutorPage';
 import AccessControl from "../components/AccessControl";
 
