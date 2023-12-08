@@ -9,6 +9,17 @@ import "@fontsource/inter";
 import { Grid } from '@mui/material';
 
 export default function ResponsiveAppBar() {
+	function logout() {
+		localStorage.removeItem("email");
+		localStorage.removeItem("firstName");
+		localStorage.removeItem("id");
+		localStorage.removeItem("lastLoggedIn");
+		localStorage.removeItem("lastName");
+		const currentURL = "" + window.location.origin;
+		window.location.assign(currentURL);
+		
+		return "Logged Out!";
+	}
   return (
     <AppBar position="absolute">
       <Container maxWidth={false} sx={{color: 'black',backgroundColor: '#D9F4EF', width: '100vw'}}>
@@ -45,6 +56,7 @@ export default function ResponsiveAppBar() {
 					</Button>
 					))}
 					<Button
+						onClick={logout}
 						sx={{
 							textTransform: 'none',
 							marginRight: 5,
