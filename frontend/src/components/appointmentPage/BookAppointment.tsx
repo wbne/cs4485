@@ -10,7 +10,6 @@ import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
-import { appointments } from './apptData';
 import { useLocation } from 'react-router-dom';
 import API_URL from '../FakeENV';
 
@@ -253,7 +252,12 @@ export default function BookAppointment() {
                                     backgroundColor: 'black',
                                     color: '#A6CAA9',
                         }}} disabled={subject === '' || tutor === '' || value === null || value === undefined || userTime === ''} variant="contained" onClick={() => {
-                            alert("Subject: " + subject + "\n Tutor: " + tutor + "\n Date: " + value?.toDate() + "\n Time: " + userTime)
+                            //alert("Subject: " + subject + "\n Tutor: " + tutor + "\n Date: " + value?.toDate() + "\n Time: " + userTime)
+				let current = localStorage.getItem("appointments") || "";
+				let studentName = localStorage.getItem("firstName") + " " + localStorage.getItem("lastName");
+				current += studentName+","+tutor+","+subject+","+value?.toDate()+","+userTime + "$";
+				console.log(current);
+				localStorage.setItem("appointments", current);
                         }}>
                             <Typography fontFamily='Inter' textTransform='none'>Create Appointment</Typography>
                         </Button>

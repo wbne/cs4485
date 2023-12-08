@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, Grid, styled } from '@mui/material';
-import { appointments } from './apptData';
+import { Appointments } from './AppointmentData';
 
 import "@fontsource/playfair-display";
 import "@fontsource/inter";
@@ -20,6 +20,7 @@ const AppointmentsBox = styled(Box)(({ theme }) => ({
 }));
 
 const AppointmentsPage = () => {
+	const appointments = Appointments();
     return (
         <div className='flex' style={{ height: '100vh', width: '100vw'}}>
             <Box pl={5} pt={6}>
