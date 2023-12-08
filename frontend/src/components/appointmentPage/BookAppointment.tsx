@@ -28,6 +28,7 @@ export default function BookAppointment() {
     const [tutor, setTutor] = useState('');
     const [value, setValue] = useState<Dayjs | null>();
     const [userTime, setUserTime] = useState<string>('');
+    const [tutors, setTutors] = useState<Tutors[]>([]);
 
     const availableTimes = [
         '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
@@ -102,11 +103,33 @@ export default function BookAppointment() {
 
             handleSubjectChange("", tutorSubject);
             handleTutorChange("", tutorName);
+
+            setTutors(tutorArray);
           })
           .catch(error => {
             console.error('Fetch error:', error);
           });
       }, []);
+
+      useEffect(() => {
+        if (subject !== '') {
+            const namesToAdd = tutors.filter((subj: Tutors) => subj.topic === subject);
+            setNames(namesToAdd.map((subj: any) => subj.name));
+        } else {
+            setNames(tutors.map((subj: Tutors) => subj.name));
+            setSubjects(tutors.map((subj: Tutors) => subj.topic));
+        }
+      }, [subject]);
+
+      useEffect(() => {
+        if (tutor !== '') {
+            const namesToAdd = tutors.filter((subj: Tutors) => subj.name === tutor);
+            setSubjects(namesToAdd.map((subj: any) => subj.topic));
+        } else {
+            setNames(tutors.map((subj: Tutors) => subj.name));
+            setSubjects(tutors.map((subj: Tutors) => subj.topic));
+        }
+      }, [tutor]);
 
       const timeGenerator  = () => {
         const size = Math.floor(Math.random() * 5) + 1;
