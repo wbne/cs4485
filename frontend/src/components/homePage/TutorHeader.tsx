@@ -9,7 +9,17 @@ import "@fontsource/inter";
 
 function TutorHeader() {
 
-	//since we know it'll all be tutor pages we can hardcode.
+	function logout() {
+		localStorage.removeItem("email");
+		localStorage.removeItem("firstName");
+		localStorage.removeItem("id");
+		localStorage.removeItem("lastLoggedIn");
+		localStorage.removeItem("lastName");
+		const currentURL = "" + window.location.origin;
+		window.location.assign(currentURL);
+		
+		return "Logged Out!";
+	}
 
   return (
     <AppBar position="absolute">
@@ -20,7 +30,7 @@ function TutorHeader() {
 					variant="h6"
 					noWrap
 					component="a"
-					href="./home"
+					href="/tutor/home"
 					sx={{
 					ml: 5,
 					display: { xs: 'none', md: 'flex' }
@@ -42,6 +52,17 @@ function TutorHeader() {
 		      <Button key="Profile" href="/tutor/profile" sx={{ textTransform: 'none', marginRight: 5 }}>
 			<Typography color='black' fontFamily='Inter'>Profile</Typography>
 		      </Button>
+					<Button
+						onClick={logout}
+						sx={{
+							textTransform: 'none',
+							marginRight: 5,
+							backgroundColor: 'black',
+							'&:hover': { backgroundColor: 'grey'},
+						}}
+						>
+						<Typography color='white' fontFamily='Inter'>Log Out</Typography>
+					</Button>
 			</>
           </Box>
         </Toolbar>
