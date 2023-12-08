@@ -1,4 +1,6 @@
 export function Appointments() {
+	if(localStorage.getItem("appointments") === null || localStorage.getItem("appointments") === undefined)
+		return []
 	let list = []
 	let fullname = localStorage.getItem("firstName") + " " + localStorage.getItem("lastName");
 	let data = localStorage.getItem("appointments");
