@@ -28,8 +28,35 @@ export default function BookAppointment() {
     const [tutor, setTutor] = useState('');
     const [value, setValue] = useState<Dayjs | null>();
 
+    const availableTimes = [
+        '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
+        '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', 
+        '5:00 PM', '6:00 PM', '7:00 PM',
+    ];
+
     const [names, setNames] = useState<string[]>([]);
     const [subjects, setSubjects] = useState<string[]>(['Math', 'Science', 'Potato']);
+
+    const [selectedTime, setSelectedTime] = useState<string>('');
+
+    // Function to handle random time selection
+    const handleRandomTime = () => {
+      const randomIndex = Math.floor(Math.random() * availableTimes.length);
+      setSelectedTime(availableTimes[randomIndex]);
+    };
+  
+    // Function to handle date change
+    const handleDateChange = (newValue: Dayjs | null) => {
+      setValue(newValue);
+  
+      // Select a random time when the date is changed
+      if (newValue) {
+        const randomIndex = Math.floor(Math.random() * availableTimes.length);
+        setSelectedTime(availableTimes[randomIndex]);
+      } else {
+        setSelectedTime('');
+      }
+    };
 
     const handleSubjectChange = (event: any, newSubject: string) => { // React.ChangeEvent<{}>
         setSubject(newSubject ?? '');
@@ -138,18 +165,40 @@ export default function BookAppointment() {
                             }
                         />
                     </div>
-                    <div className='flex flex-row justify-between w-10/12'>
+                    <div className='flex flex-col justify-between w-10/12'>
                         <Typography mt={2.5} fontFamily='Inter'>Available date</Typography>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateCalendar
                                 sx={{fontFamily: 'Poppins'}}
                                 value={value}
                                 disablePast
-                                onChange={(newValue) => setValue(newValue)}
+                                onChange={handleDateChange}
                                 showDaysOutsideCurrentMonth 
                                 fixedWeekNumber={5} 
                                 views={['year', 'month', 'day']}/>
                         </LocalizationProvider>
+                        {selectedTime && (
+                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                                {[...Array(Math.floor(Math.random() * 5) + 1)].map((_, index) => (
+                                <Typography
+                                    key={index}
+                                    fontFamily='Inter'
+                                    mt={2.5}
+                                    sx={{
+                                    backgroundColor: 'rgb(126, 114, 159, 0.5)',
+                                    width: '15%',
+                                    padding: '0.2em',
+                                    borderRadius: 2,
+                                    textAlign: 'center',
+                                    // display: 'inline-block',
+                                    margin: '0.5em',
+                                    }}
+                                >
+                                    {selectedTime}
+                                </Typography>
+                                ))}
+                          </div>
+                        )}
                     </div>
                     <div className='flex flex-row justify-center'>
                         <Button sx={{backgroundColor: '#A6CAA9', color: 'black', ml: 2, '&:hover': {
