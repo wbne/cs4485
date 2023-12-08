@@ -1,5 +1,5 @@
 import AppointmentsPage from '../components/appointmentPage/AppointmentPage'; 
-import Header from '../components/profilePage/Header';
+import Header from '../components/homePage/Header';
 import AccessControl from "../components/AccessControl";
 
 function Appointment() {

@@ -44,6 +44,16 @@ export default function ResponsiveAppBar() {
 						<Typography color='black' fontFamily='Inter'>{text}</Typography>
 					</Button>
 					))}
+					<Button
+						sx={{
+							textTransform: 'none',
+							marginRight: 5,
+							backgroundColor: 'black',
+							'&:hover': { backgroundColor: 'grey'},
+						}}
+						>
+						<Typography color='white' fontFamily='Inter'>Log Out</Typography>
+					</Button>
 				</Box>
 			</Grid>
 		</Toolbar>

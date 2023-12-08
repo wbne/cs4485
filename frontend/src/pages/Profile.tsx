@@ -1,4 +1,4 @@
-import Header from '../components/profilePage/Header';
+import Header from '../components/homePage/Header';
 import ProfilePage from '../components/profilePage/ProfilePage';
 import AccessControl from "../components/AccessControl";
 
