@@ -76,6 +76,11 @@ export default function FavoriteTutorPage() {
         setTutors(updatedTutors);
         setDeleteDialogOpen(false);
         setSelectedTutor(null);
+
+        const studentId = localStorage.getItem('id');
+        fetch(API_URL() + '/users/' + studentId + '/favorites/remove?tutorId=' + selectedTutor.id,  {
+            method: 'DELETE'
+        });
       }
     };
 

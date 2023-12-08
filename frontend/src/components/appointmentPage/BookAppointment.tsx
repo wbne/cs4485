@@ -6,7 +6,7 @@ import '@fontsource/inter';
 import '@fontsource/inter/300.css';
 //import '@fontsource/poppins';
 import { useEffect, useState } from 'react';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers';
@@ -27,6 +27,7 @@ export default function BookAppointment() {
     const [subject, setSubject] = useState('');
     const [tutor, setTutor] = useState('');
     const [value, setValue] = useState<Dayjs | null>();
+    const [userTime, setUserTime] = useState<string>('');
 
     const availableTimes = [
         '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM',
@@ -35,27 +36,27 @@ export default function BookAppointment() {
     ];
 
     const [names, setNames] = useState<string[]>([]);
-    const [subjects, setSubjects] = useState<string[]>(['Math', 'Science', 'Potato']);
+    const [subjects, setSubjects] = useState<string[]>([]);
+    const [times, setTimes] = useState<string[]>([]);
+    
 
     const [selectedTime, setSelectedTime] = useState<string>('');
-
-    // Function to handle random time selection
-    const handleRandomTime = () => {
-      const randomIndex = Math.floor(Math.random() * availableTimes.length);
-      setSelectedTime(availableTimes[randomIndex]);
-    };
   
     // Function to handle date change
     const handleDateChange = (newValue: Dayjs | null) => {
-      setValue(newValue);
-  
-      // Select a random time when the date is changed
-      if (newValue) {
-        const randomIndex = Math.floor(Math.random() * availableTimes.length);
-        setSelectedTime(availableTimes[randomIndex]);
-      } else {
-        setSelectedTime('');
-      }
+        if (value) {
+            if (!dayjs(newValue).isSame(value, 'day')) {
+                setValue(newValue);
+                setSelectedTime('0');
+                timeGenerator();
+                setUserTime('');
+            }
+        } else {
+            setUserTime('');
+            setValue(newValue);
+            setSelectedTime('0');
+            timeGenerator()
+        }
     };
 
     const handleSubjectChange = (event: any, newSubject: string) => { // React.ChangeEvent<{}>
@@ -66,7 +67,7 @@ export default function BookAppointment() {
         setTutor(newTutor);
     };
 
-    const apiUrl = API_URL() + '/students';
+    const apiUrl = API_URL() + '/tutors';
     useEffect(() => {
         // For sake of logging in, do johndoe@gmail.com and Password123$
     
@@ -93,7 +94,7 @@ export default function BookAppointment() {
             const subjectsToAdd = tutorArray.filter((subj: any) => !subjects.includes(subj.topic));
             const namesToAdd = tutorArray.filter((subj: any) => !names.includes(subj.name));
             
-            // setSubjects(subjectsToAdd.map((subj: any) => subj.topic));
+            setSubjects(subjectsToAdd.map((subj: any) => subj.topic));
             setNames(namesToAdd.map((subj: any) => subj.name));
 
             setTutor(tutorName);
@@ -106,6 +107,27 @@ export default function BookAppointment() {
             console.error('Fetch error:', error);
           });
       }, []);
+
+      const timeGenerator  = () => {
+        const size = Math.floor(Math.random() * 5) + 1;
+        let tms: string[] = [];
+        while (tms.length != size) {
+            let randomIndex = Math.floor(Math.random() * availableTimes.length);
+            if (!tms.includes(availableTimes[randomIndex])) {
+                tms.push(availableTimes[randomIndex]);
+            }
+        }
+        
+        tms.sort(sortByTime)
+        setTimes(tms);
+      };
+
+      // Custom sorting function
+    const sortByTime = (a: string, b: string) => {
+        const timeA = new Date('2021-01-01 ' + a);
+        const timeB = new Date('2021-01-01 ' + b);
+        return timeA.getTime() - timeB.getTime();
+    };
 
     return (
         <div className='flex flex-row' style={{height: '100%', width: '100vw',}}>
@@ -179,23 +201,26 @@ export default function BookAppointment() {
                         </LocalizationProvider>
                         {selectedTime && (
                             <div style={{display: 'flex', justifyContent: 'center'}}>
-                                {[...Array(Math.floor(Math.random() * 5) + 1)].map((_, index) => (
-                                <Typography
-                                    key={index}
-                                    fontFamily='Inter'
-                                    mt={2.5}
-                                    sx={{
-                                    backgroundColor: 'rgb(126, 114, 159, 0.5)',
-                                    width: '15%',
-                                    padding: '0.2em',
-                                    borderRadius: 2,
-                                    textAlign: 'center',
-                                    // display: 'inline-block',
-                                    margin: '0.5em',
-                                    }}
-                                >
-                                    {selectedTime}
-                                </Typography>
+                                {times.map((value, index) => (
+                                    <Button sx={{
+                                        backgroundColor: 'rgb(126, 114, 159, 0.5)',
+                                        width: '15%',
+                                        padding: '0.2em',
+                                        borderRadius: 2,
+                                        textAlign: 'center',
+                                        margin: '0.5em',
+                                        mt: 2.5,
+                                        color: 'black'
+                                        }}
+                                        onClick={() => setUserTime(value)}
+                                        >
+                                        <Typography
+                                            key={index}
+                                            fontFamily='Inter'
+                                        >
+                                            {value}
+                                        </Typography>
+                                    </Button>
                                 ))}
                           </div>
                         )}
@@ -204,8 +229,8 @@ export default function BookAppointment() {
                         <Button sx={{backgroundColor: '#A6CAA9', color: 'black', ml: 2, '&:hover': {
                                     backgroundColor: 'black',
                                     color: '#A6CAA9',
-                        }}} disabled={subject === '' || tutor === '' || value === null || value === undefined} variant="contained" onClick={() => {
-                            alert("Subject: " + subject + "\n Tutor: " + tutor + "\n Date: " + value?.toDate())
+                        }}} disabled={subject === '' || tutor === '' || value === null || value === undefined || userTime === ''} variant="contained" onClick={() => {
+                            alert("Subject: " + subject + "\n Tutor: " + tutor + "\n Date: " + value?.toDate() + "\n Time: " + userTime)
                         }}>
                             <Typography fontFamily='Inter' textTransform='none'>Create Appointment</Typography>
                         </Button>
