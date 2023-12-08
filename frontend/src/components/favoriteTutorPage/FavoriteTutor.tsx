@@ -8,6 +8,7 @@ import '@fontsource/inter';
 import '@fontsource/inter/300.css';
 import pfp from '../../assets/pfp_temp.jpg';
 import API_URL from '../FakeENV';
+import { Link } from 'react-router-dom';
 
 interface Tutors {
     name: string;
@@ -105,11 +106,14 @@ export default function FavoriteTutorPage() {
                                             </div>
                                         </div>
                                         <div className='pr-5'>
-                                            <Button 
+                                            <Link to={'/appointments/book'} state={{ tutorName: tutor.name, tutorSubject: tutor.topic }} style={{backgroundColor: '#A6CAA9', color: 'black', marginRight:2, height: '30px'}}>
+                                                <Typography fontFamily='Inter' textTransform='none'>Book</Typography>
+                                            </Link>
+                                            {/* <Link
                                                 href={'/appointments/book'}
                                                 sx={{backgroundColor: '#A6CAA9', color: 'black', mr:2, height: '30px'}}>
                                                 <Typography fontFamily='Inter' textTransform='none'>Book</Typography>
-                                            </Button>
+                                            </Link> */}
                                             <Button 
                                                 onClick={() => handleDeleteClick(tutor)}
                                                 sx={{backgroundColor: '#F0B8B8', color: 'black', height: '30px', '&:hover': {
