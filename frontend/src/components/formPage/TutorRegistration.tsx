@@ -169,6 +169,16 @@ function TutorRegistration() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log('Tutor Registration Data:', formData);
+	let nanoseconds = new Date();
+	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 36000;
+        localStorage.setItem("lastLoggedIn", "" + expirationTime);
+	localStorage.setItem("firstName", "" + formData.firstName);
+	localStorage.setItem("lastName", "" + formData.lastName);
+	localStorage.setItem("email", "" + formData.email);
+	localStorage.setItem("id", "" + 10);
+        const currentURL = "" + window.location;
+        const newURL = currentURL.replaceAll("newtutor", "tutor/home");
+        window.location.assign(newURL);
   };
 
   return (

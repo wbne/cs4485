@@ -39,11 +39,19 @@ function RegistrationForm() {
 
   // Handle form submission
   const handleSubmit = (event: any) => {
-    //TODO: Add logic to see if user is validated.
-    // 		If they are then redirect
-    // 		Else return the error
-    //event.preventDefault();
+    event.preventDefault();
     console.log('Form Data:', formData);
+	let nanoseconds = new Date();
+	let expirationTime = Math.ceil(nanoseconds.getTime() / 1000) + 36000;
+        localStorage.setItem("lastLoggedIn", "" + expirationTime);
+	localStorage.setItem("firstName", "" + formData.firstName);
+	localStorage.setItem("lastName", "" + formData.lastName);
+	localStorage.setItem("email", "" + formData.email);
+	localStorage.setItem("id", "" + 10);
+        const currentURL = "" + window.location;
+        const newURL = currentURL.replaceAll("newstudent", "home");
+        window.location.assign(newURL);
+        window.location.assign(newURL);
   };
 
   return (
@@ -122,6 +130,7 @@ function RegistrationForm() {
         variant="contained"
         color="primary"
         fullWidth
+	onClick={handleSubmit}
       >
         Register
       </Button>
